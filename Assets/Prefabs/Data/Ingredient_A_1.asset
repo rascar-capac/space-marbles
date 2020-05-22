@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6eddff750b338b4e9043ba3c1cb6c2d, type: 3}
+  m_Name: Ingredient_A_1
+  m_EditorClassIdentifier: 
+  _ingredientName: Charmeur
+  _namingElements:
+    planetSynonym:
+      hasContractedArticle: 0
+      word: boule
+      genre: 0
+      plurality: 0
+    concept:
+      hasContractedArticle: 0
+      word: charmes
+      genre: 1
+      plurality: 1
+    firstName:
+      hasContractedArticle: 0
+      word: 
+      genre: 0
+      plurality: 0
+    nickname:
+      hasContractedArticle: 0
+      word: Aphrodite
+      genre: 0
+      plurality: 0
+    matriculation:
+      hasContractedArticle: 0
+      word: 
+      genre: 0
+      plurality: 0
+    styleAdjective:
+      hasContractedArticle: 0
+      invariable: 
+      singularFeminine: 
+      singularMasculine: 
+      pluralFeminine: 
+      pluralMasculine: 
+    personalityAdjective:
+      hasContractedArticle: 0
+      invariable: 
+      singularFeminine: 
+      singularMasculine: 
+      pluralFeminine: 
+      pluralMasculine: 
+    color:
+      hasContractedArticle: 0
+      invariable: 
+      singularFeminine: 
+      singularMasculine: 
+      pluralFeminine: 
+      pluralMasculine: 
+  _bodySprite: {fileID: 21300000, guid: 0c687a8bd6a2ffc4583aef93909aac76, type: 3}
+  _type: 0
+  _surface: {fileID: 2800000, guid: a19521d2fd29a6b42b4e893bebc05bec, type: 3}
+  _pattern: {fileID: 2800000, guid: fae2d328e91d37b4f823d061c4776ced, type: 3}
+  _colors: []
+  _extra: {fileID: 0}
+  _mass: 5
+  _drag: 1
+  _angularDrag: 2
+  _physicsMaterial: {fileID: 6200000, guid: e83bb2f5ee3960649bb8a4f0a7905bfc, type: 2}
+  _precision: 1
+  _influenceZone: 1
+  _animatorController: {fileID: 22100000, guid: 29cf419aa5e07e241a6c2eec5a002c62,
+    type: 2}

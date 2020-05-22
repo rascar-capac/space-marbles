@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6eddff750b338b4e9043ba3c1cb6c2d, type: 3}
+  m_Name: Ingredient_A_0
+  m_EditorClassIdentifier: 
+  _ingredientName: Magicien
+  _namingElements:
+    planetSynonym:
+      hasContractedArticle: 1
+      word: astre
+      genre: 1
+      plurality: 0
+    concept:
+      hasContractedArticle: 0
+      word: magie
+      genre: 0
+      plurality: 0
+    firstName:
+      hasContractedArticle: 0
+      word: 
+      genre: 0
+      plurality: 0
+    nickname:
+      hasContractedArticle: 0
+      word: Orion
+      genre: 1
+      plurality: 0
+    matriculation:
+      hasContractedArticle: 0
+      word: 
+      genre: 0
+      plurality: 0
+    styleAdjective:
+      hasContractedArticle: 0
+      invariable: 
+      singularFeminine: 
+      singularMasculine: 
+      pluralFeminine: 
+      pluralMasculine: 
+    personalityAdjective:
+      hasContractedArticle: 0
+      invariable: 
+      singularFeminine: 
+      singularMasculine: 
+      pluralFeminine: 
+      pluralMasculine: 
+    color:
+      hasContractedArticle: 0
+      invariable: 
+      singularFeminine: 
+      singularMasculine: 
+      pluralFeminine: 
+      pluralMasculine: 
+  _bodySprite: {fileID: 21300000, guid: a52d5ea062f9333498148aafa2d23442, type: 3}
+  _type: 0
+  _surface: {fileID: 2800000, guid: f1baa92f8dd443d428965129c6148f4e, type: 3}
+  _pattern: {fileID: 2800000, guid: fae2d328e91d37b4f823d061c4776ced, type: 3}
+  _colors: []
+  _extra: {fileID: 0}
+  _mass: 5
+  _drag: 2
+  _angularDrag: 0.5
+  _physicsMaterial: {fileID: 6200000, guid: 7755caf1112162c46b1ac5e88cdeb93e, type: 2}
+  _precision: 1
+  _influenceZone: 2
+  _animatorController: {fileID: 22100000, guid: ce821b6639322124bbe9d8698423a127,
+    type: 2}
