@@ -19,9 +19,4 @@ public class PanelUpdater : MonoBehaviour
         get => _typeLabel.text;
         set => _typeLabel.text = value;
     }
-
-    private void Start()
-    {
-        gameObject.SetActive(false);
-    }
 }

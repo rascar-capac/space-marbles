@@ -10,18 +10,18 @@ public abstract class A2DSpawner<T, U> : ASpawner<T, U>
     [SerializeField] private int count = 0;
     [SerializeField] private bool hasInitialMotion = false;
     [SerializeField] private float minGapBetweenObjects = 30f;
-
-    public PanelUpdater ElementIDPanel { get; set; }
+    [SerializeField] private Canvas canvas = null;
 
     private bool isCircle;
     private CircleCollider2D circularArea;
     private float spawnX;
     private float spawnY;
+    private Camera mainCamera;
 
     protected override void Awake()
     {
         base.Awake();
-        ElementIDPanel = FindObjectOfType<PanelUpdater>();
+        mainCamera = Camera.main;
     }
 
     private void Start()
@@ -79,6 +79,11 @@ public abstract class A2DSpawner<T, U> : ASpawner<T, U>
         if(hasInitialMotion)
         {
             newObject.GetComponent<Rigidbody2D>().AddForce(maxInitialForce * Random.insideUnitCircle, ForceMode2D.Impulse);
+        }
+
+        if(newObject.TryGetComponent<Identifiable>(out Identifiable identifiable))
+        {
+            identifiable.Init(canvas, mainCamera);
         }
 
         return newObject;

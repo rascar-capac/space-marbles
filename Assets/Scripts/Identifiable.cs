@@ -10,34 +10,61 @@ public class Identifiable : MonoBehaviour
 
     public string Name { get; set; }
 
-    private A2DSpawner<ADataInitializer<ScriptableObject>, ScriptableObject> gameManager;
+    [SerializeField] private PanelUpdater idPanelPrefab;
+    private PanelUpdater idPanel;
+    private Canvas canvas;
     private Camera mainCamera;
+    private bool isMouseDown;
+    private bool isMouseOver;
 
     private void Awake()
     {
-        gameManager = FindObjectOfType<A2DSpawner<ADataInitializer<ScriptableObject>, ScriptableObject>>();
-        mainCamera = Camera.main;
+        isMouseDown = false;
+        isMouseOver = false;
+    }
+
+    public void Init(Canvas canvas, Camera mainCamera)
+    {
+        this.canvas = canvas;
+        this.mainCamera = mainCamera;
+        idPanel = Instantiate(idPanelPrefab, canvas.transform);
+        idPanel.NameLabel = Name;
+        idPanel.gameObject.SetActive(false);
     }
 
     private void OnMouseDown()
     {
-        gameManager.ElementIDPanel.gameObject.SetActive(false);
+        idPanel.gameObject.SetActive(false);
+        isMouseDown = true;
+    }
+
+    private void OnMouseUp()
+    {
+        if(isMouseOver)
+        {
+            idPanel.gameObject.SetActive(true);
+        }
+        isMouseDown = false;
     }
 
     private void OnMouseEnter()
     {
-        gameManager.ElementIDPanel.NameLabel = Name;
-        gameManager.ElementIDPanel.gameObject.SetActive(true);
+        if(!isMouseDown)
+        {
+           idPanel.gameObject.SetActive(true);
+        }
+        isMouseOver = true;
     }
 
     private void OnMouseOver()
     {
         Vector3 panelPosition = transform.position + new Vector3(panelOffset, 0, 0);
-        gameManager.ElementIDPanel.transform.position = mainCamera.WorldToScreenPoint(panelPosition);
+        idPanel.transform.position = mainCamera.WorldToScreenPoint(panelPosition);
     }
 
     private void OnMouseExit()
     {
-        gameManager.ElementIDPanel.gameObject.SetActive(false);
+        idPanel.gameObject.SetActive(false);
+        isMouseOver = false;
     }
 }
