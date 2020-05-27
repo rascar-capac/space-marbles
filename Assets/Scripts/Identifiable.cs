@@ -10,12 +10,12 @@ public class Identifiable : MonoBehaviour
 
     public string Name { get; set; }
 
-    private Spawner gameManager;
+    private A2DSpawner<ADataInitializer<ScriptableObject>, ScriptableObject> gameManager;
     private Camera mainCamera;
 
     private void Awake()
     {
-        gameManager = FindObjectOfType<Spawner>();
+        gameManager = FindObjectOfType<A2DSpawner<ADataInitializer<ScriptableObject>, ScriptableObject>>();
         mainCamera = Camera.main;
     }
 

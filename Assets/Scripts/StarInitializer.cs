@@ -4,29 +4,29 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class StarInitializer : AInitializer<StarData>
+public class StarInitializer : ADataInitializer<StarData>
 {
     [SerializeField] private GameObject body = null;
     [SerializeField] private OrbitHandler orbitPrefab = null;
 
     public List<OrbitHandler> Orbits { get; set; }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         Orbits = new List<OrbitHandler>();
-        Init();
     }
 
-    protected override void Init()
+    public override void Init(StarData data)
     {
-        base.Init();
-        Sprite bodySprite = Data.BodySprites[Random.Range(0, Data.BodySprites.Count)];
+        base.Init(data);
+        Sprite bodySprite = data.BodySprites[Random.Range(0, data.BodySprites.Count)];
         body.GetComponent<SpriteRenderer>().sprite = bodySprite;
 
-        int orbitCount = Random.Range(Data.MinCount, Data.MaxCount + 1);
+        int orbitCount = Random.Range(data.MinCount, data.MaxCount + 1);
 
         List<Vector2> sizes = new List<Vector2>();
-        if(Data.IsOverlappingAllowed)
+        if(data.IsOverlappingAllowed)
         {
             sizes = ComputeOverlappingSizes(orbitCount);
         }
@@ -42,9 +42,9 @@ public class StarInitializer : AInitializer<StarData>
             orbit.Width = sizes[i].x;
             orbit.Heigth = sizes[i].y;
 
-            orbit.Period = Random.Range(Data.MinPeriod, Data.MaxPeriod);
+            orbit.Period = Random.Range(data.MinPeriod, data.MaxPeriod);
 
-            orbit.IsClockwise = Data.IsClockwiseOnly ? true : Random.value < 0.5f;
+            orbit.IsClockwise = data.IsClockwiseOnly ? true : Random.value < 0.5f;
 
             Orbits.Add(orbit);
         }

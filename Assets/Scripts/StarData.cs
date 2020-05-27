@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Star", menuName = "Star")]
-public class StarData : AData
+[CreateAssetMenu(menuName = "Star")]
+public class StarData : ScriptableObject
 {
     [SerializeField] private List<Sprite> _bodySprites = null;
     [SerializeField] private int _minCount = 1;

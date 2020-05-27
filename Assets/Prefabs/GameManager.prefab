@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7018855681671090822}
-  - component: {fileID: 7018855681671090821}
+  - component: {fileID: 2987732625736831193}
+  - component: {fileID: 3533414235161348720}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7018855681671090821
+--- !u!114 &2987732625736831193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,9 +41,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 7018855681671090820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c62e3d04b536184697a7008c19bac49, type: 3}
+  m_Script: {fileID: 11500000, guid: 753cdb5ca72e5d1458f7548ff7ecaa92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameObjects: []
-  playground: {fileID: 0}
-  initialVelocityIntensity: 10
+  prefabs:
+  - {fileID: -2145331996283020571, guid: 1a1333d3357813f4d8d947419c2f8b37, type: 3}
+  context: {fileID: 0}
+  hasUniqueData: 0
+  dataDeck:
+  - {fileID: 11400000, guid: 8c85056ee9dc1e44ca09a894595de73a, type: 2}
+  - {fileID: 11400000, guid: fe4b922246bc82847b2f61792b8a16e0, type: 2}
+  - {fileID: 11400000, guid: 5c39f8a7f3893904c8f40dd298105b0e, type: 2}
+  - {fileID: 11400000, guid: 57ec2b8f0f5bb214288693802af37a4f, type: 2}
+  spawnArea: {fileID: 0}
+  maxInitialForce: 10
+  count: 100
+  hasInitialMotion: 1
+  minGapBetweenObjects: 5
+--- !u!114 &3533414235161348720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7018855681671090820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b364a9955f5ba4440bce21c7cbe0f94c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 6566823627241433620, guid: 30984039ea212dc4c96e8dc4f196f460, type: 3}
+  context: {fileID: 0}
+  hasUniqueData: 0
+  dataDeck:
+  - {fileID: 11400000, guid: 78577792f006fce4c8abc1deda053240, type: 2}
+  spawnArea: {fileID: 0}
+  maxInitialForce: 10
+  count: 3
+  hasInitialMotion: 0
+  minGapBetweenObjects: 100

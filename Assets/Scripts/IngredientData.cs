@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Ingredient", menuName = "Ingredient")]
-public class IngredientData : AData
+[CreateAssetMenu(menuName = "Ingredient")]
+public class IngredientData : ScriptableObject
 {
     [SerializeField] private string _ingredientName = "";
     [SerializeField] private NameElements _namingElements = null;

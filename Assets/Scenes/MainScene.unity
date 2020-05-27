@@ -710,102 +710,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7018855681671090820, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: m_Name
-      value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: GameObjects.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: GameObjects.Array.data[0].prefabs.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: GameObjects.Array.data[1].prefabs.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: playground
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: GameObjects.Array.data[0].number
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: GameObjects.Array.data[0].prefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 1134492280859549453, guid: 1a1333d3357813f4d8d947419c2f8b37,
-        type: 3}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: GameObjects.Array.data[1].number
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: GameObjects.Array.data[1].prefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 537882803223016396, guid: 30984039ea212dc4c96e8dc4f196f460,
-        type: 3}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: GameObjects.Array.data[1].isMotionless
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: playgroundEdgeSize
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: _playground
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: GameObjects.Array.data[1].minimumGapBetweenObjects
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: GameObjects.Array.data[1].isKinematic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
-        type: 3}
-      propertyPath: GameObjects.Array.data[1].minGapBetweenObjects
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
+    - target: {fileID: 2987732625736831193, guid: 4e73cb6d15f74e844b30de65902da5b0,
         type: 3}
       propertyPath: spawnArea
       value: 
       objectReference: {fileID: 1875934136}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
+    - target: {fileID: 3533414235161348720, guid: 4e73cb6d15f74e844b30de65902da5b0,
         type: 3}
-      propertyPath: GameObjects.Array.data[0].minGapBetweenObjects
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7018855681671090821, guid: 4e73cb6d15f74e844b30de65902da5b0,
+      propertyPath: spawnArea
+      value: 
+      objectReference: {fileID: 1875934136}
+    - target: {fileID: 7018855681671090820, guid: 4e73cb6d15f74e844b30de65902da5b0,
         type: 3}
-      propertyPath: maxInitialForce
-      value: 5
+      propertyPath: m_Name
+      value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 7018855681671090822, guid: 4e73cb6d15f74e844b30de65902da5b0,
         type: 3}

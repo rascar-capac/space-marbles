@@ -14,14 +14,12 @@ public class PlanetGenerator : MonoBehaviour
     public bool CanGeneratePlanet { get; set; }
 
     private List<IngredientInitializer> alreadyCollidingIngredients;
-    private Spawner gameManager;
     private Vector2 spawnPosition;
     private LineRenderer lineRenderer;
     private Camera mainCamera;
 
     private void Awake()
     {
-        gameManager = FindObjectOfType<Spawner>();
         alreadyCollidingIngredients = new List<IngredientInitializer>();
         Ingredients = new Dictionary<IngredientData.IngredientType, IngredientInitializer>();
         lineRenderer = GetComponent<LineRenderer>();
