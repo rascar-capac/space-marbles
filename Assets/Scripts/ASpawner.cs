@@ -35,7 +35,7 @@ public abstract class ASpawner<T, U> : MonoBehaviour
         T prefab = prefabs.Count > 1 ? prefabs[Random.Range(0, prefabs.Count)] : prefabs[0];
         T newObject = Instantiate(prefab, context);
         U data = PickRandomData(dataDeck, hasUniqueData);
-        newObject.Init(data);
+        newObject.InitData(data);
         spawnedObjects.Add(newObject);
 
         return newObject;

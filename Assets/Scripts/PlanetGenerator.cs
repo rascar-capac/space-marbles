@@ -147,8 +147,8 @@ public class PlanetGenerator : MonoBehaviour
         averageAngularDrag /= Ingredients.Count;
 
         GameObject generatedPlanet = Instantiate(planetPrefab, spawnPosition, Quaternion.identity);
-        generatedPlanet.GetComponent<Identifiable>().Name = ComputeRandomName();
-        Debug.Log(generatedPlanet.GetComponent<Identifiable>().Name);
+        // generatedPlanet.GetComponent<Identifiable>().Name = ComputeRandomName();
+        // Debug.Log(generatedPlanet.GetComponent<Identifiable>().Name);
         SpriteRenderer renderer = generatedPlanet.GetComponent<SpriteRenderer>();
         renderer.material.SetTexture("_MainTex", surface);
         renderer.material.SetTexture("_Pattern", pattern);

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class A2DSpawner<T, U> : ASpawner<T, U>
-        where T : ADataInitializer<U>
+        where T : A2DDataInitializer<U>
+        where U : ScriptableObject
 {
     [SerializeField] private Collider2D spawnArea = null;
     [SerializeField] private float maxInitialForce = 10f;
@@ -45,6 +46,8 @@ public abstract class A2DSpawner<T, U> : ASpawner<T, U>
     {
         T newObject = base.SpawnObject();
 
+        newObject.Init(canvas, mainCamera);
+
         Vector2 randomPosition = Vector2.zero;
         bool isPositionValid = false;
         while(!isPositionValid)
@@ -79,11 +82,6 @@ public abstract class A2DSpawner<T, U> : ASpawner<T, U>
         if(hasInitialMotion)
         {
             newObject.GetComponent<Rigidbody2D>().AddForce(maxInitialForce * Random.insideUnitCircle, ForceMode2D.Impulse);
-        }
-
-        if(newObject.TryGetComponent<Identifiable>(out Identifiable identifiable))
-        {
-            identifiable.Init(canvas, mainCamera);
         }
 
         return newObject;

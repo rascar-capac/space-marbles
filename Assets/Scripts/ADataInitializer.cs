@@ -11,7 +11,7 @@ public abstract class ADataInitializer<T> : MonoBehaviour
     protected T data;
     private DataInitializedEvent onDataInitialized;
 
-    public virtual void Init(T data)
+    public virtual void InitData(T data)
     {
         this.data = data;
         onDataInitialized.Invoke(data);

@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class StarInitializer : ADataInitializer<StarData>
+public class StarInitializer : A2DDataInitializer<StarData>
 {
     [SerializeField] private GameObject body = null;
     [SerializeField] private OrbitHandler orbitPrefab = null;
@@ -17,9 +17,9 @@ public class StarInitializer : ADataInitializer<StarData>
         Orbits = new List<OrbitHandler>();
     }
 
-    public override void Init(StarData data)
+    public override void InitData(StarData data)
     {
-        base.Init(data);
+        base.InitData(data);
         Sprite bodySprite = data.BodySprites[Random.Range(0, data.BodySprites.Count)];
         body.GetComponent<SpriteRenderer>().sprite = bodySprite;
 

@@ -7,10 +7,8 @@ using TMPro;
 public class Identifiable : MonoBehaviour
 {
     [SerializeField] private float panelOffset = 10f;
-
-    public string Name { get; set; }
-
     [SerializeField] private PanelUpdater idPanelPrefab;
+
     private PanelUpdater idPanel;
     private Canvas canvas;
     private Camera mainCamera;
@@ -23,12 +21,12 @@ public class Identifiable : MonoBehaviour
         isMouseOver = false;
     }
 
-    public void Init(Canvas canvas, Camera mainCamera)
+    public void Init(string name, Canvas canvas, Camera mainCamera)
     {
         this.canvas = canvas;
         this.mainCamera = mainCamera;
         idPanel = Instantiate(idPanelPrefab, canvas.transform);
-        idPanel.NameLabel = Name;
+        idPanel.NameLabel = name;
         idPanel.gameObject.SetActive(false);
     }
 
