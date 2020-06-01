@@ -8,7 +8,7 @@ public abstract class ASpawner<T, U> : MonoBehaviour
     public List<T> SpawnedObjects => spawnedObjects;
 
     [SerializeField] private List<T> prefabs = null;
-    [SerializeField] private Transform context = null;
+    [SerializeField] private Transform parent = null;
     [SerializeField] private bool hasUniqueData = false;
     [SerializeField] protected List<U> dataDeck = null;
 
@@ -33,7 +33,7 @@ public abstract class ASpawner<T, U> : MonoBehaviour
     {
 
         T prefab = prefabs.Count > 1 ? prefabs[Random.Range(0, prefabs.Count)] : prefabs[0];
-        T newObject = Instantiate(prefab, context);
+        T newObject = Instantiate(prefab, parent);
         U data = PickRandomData(dataDeck, hasUniqueData);
         newObject.InitData(data);
         spawnedObjects.Add(newObject);

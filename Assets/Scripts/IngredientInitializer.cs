@@ -8,33 +8,28 @@ public class IngredientInitializer : A2DDataInitializer<IngredientData>
     [SerializeField] private GameObject body = null;
     [SerializeField] private GameObject detector = null;
 
-    public override void InitData(IngredientData data)
+    public override void Init(Canvas canvas, Camera mainCamera)
     {
-        base.InitData(data);
+        base.Init(canvas, mainCamera);
 
-        GetComponent<Identifiable>()?.Init(Data.IngredientName, Canvas, MainCamera);
-
+        GetComponent<Identifiable>()?.Init(data.IngredientName, canvas, mainCamera);
         if(TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
         {
-            rb.mass = Data.Mass;
-            rb.drag = Data.Drag;
+            rb.mass = data.Mass;
+            rb.drag = data.Drag;
         }
         if(TryGetComponent<Collider2D>(out Collider2D collider))
         {
-            collider.sharedMaterial = Data.PhysicsMaterial;
+            collider.sharedMaterial = data.PhysicsMaterial;
         }
         if(TryGetComponent<Animator>(out Animator animator))
         {
-            animator.runtimeAnimatorController = Data.AnimatorController;
+            animator.runtimeAnimatorController = data.AnimatorController;
         }
         if(body.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer))
         {
-            renderer.sprite = Data.BodySprite;
+            renderer.sprite = data.BodySprite;
         }
-        if(detector.TryGetComponent<CircleCollider2D>(out CircleCollider2D detectorCollider))
-        {
-            detectorCollider.radius = Data.InfluenceZone;
-        }
-        // TODO detector.GetComponent<PlanetGenerator>()?.Init(Data.InfluenceZone);
+        detector.GetComponent<PlanetGenerator>()?.Init(data.InfluenceZone, canvas, mainCamera);
     }
 }

@@ -519,6 +519,11 @@ PrefabInstance:
       propertyPath: spawnArea
       value: 
       objectReference: {fileID: 1875934136}
+    - target: {fileID: 3533414235161348720, guid: 4e73cb6d15f74e844b30de65902da5b0,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1675257588}
     - target: {fileID: 7018855681671090820, guid: 4e73cb6d15f74e844b30de65902da5b0,
         type: 3}
       propertyPath: m_Name

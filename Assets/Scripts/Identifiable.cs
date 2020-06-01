@@ -7,7 +7,7 @@ using TMPro;
 public class Identifiable : MonoBehaviour
 {
     [SerializeField] private float panelOffset = 10f;
-    [SerializeField] private PanelUpdater idPanelPrefab;
+    [SerializeField] private PanelUpdater idPanelPrefab = null;
 
     private PanelUpdater idPanel;
     private Canvas canvas;

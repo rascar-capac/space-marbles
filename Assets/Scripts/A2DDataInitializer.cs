@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class A2DDataInitializer<T> : ADataInitializer<T> where T : ScriptableObject
+public class A2DDataInitializer<T> : ADataInitializer<T>
 {
-    public Canvas Canvas => canvas;
-    public Camera MainCamera => mainCamera;
+    protected Canvas canvas;
+    protected Camera mainCamera;
 
-    private Canvas canvas;
-    private Camera mainCamera;
-
-    public void Init(Canvas canvas, Camera mainCamera)
+    public virtual void Init(Canvas canvas, Camera mainCamera)
     {
         this.canvas = canvas;
         this.mainCamera = mainCamera;

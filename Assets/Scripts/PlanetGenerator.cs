@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer))]
+[RequireComponent(typeof(LineRenderer), typeof(CircleCollider2D))]
 public class PlanetGenerator : MonoBehaviour
 {
     [SerializeField] private IngredientInitializer ingredient = null;
-    [SerializeField] private GameObject planetPrefab = null;
+    [SerializeField] private PlanetInitializer planetPrefab = null;
     [SerializeField] private NameTemplatesData nameTemplates = null;
     [SerializeField] private int segmentsCount = 30;
 
@@ -14,21 +14,23 @@ public class PlanetGenerator : MonoBehaviour
     public bool CanGeneratePlanet { get; set; }
 
     private List<IngredientInitializer> alreadyCollidingIngredients;
-    private Vector2 spawnPosition;
+    private Vector3 spawnPosition;
     private LineRenderer lineRenderer;
     private Camera mainCamera;
+    private Canvas canvas;
+
+    public void Init(float influenceZone, Canvas canvas, Camera mainCamera)
+    {
+        GetComponent<CircleCollider2D>().radius = influenceZone;
+        this.canvas = canvas;
+        this.mainCamera = mainCamera;
+    }
 
     private void Awake()
     {
         alreadyCollidingIngredients = new List<IngredientInitializer>();
         Ingredients = new Dictionary<IngredientData.IngredientType, IngredientInitializer>();
         lineRenderer = GetComponent<LineRenderer>();
-        mainCamera = Camera.main;
-    }
-
-    private void Start()
-    {
-        spawnPosition = Vector2.zero;
         CanGeneratePlanet = false;
     }
 
@@ -46,14 +48,17 @@ public class PlanetGenerator : MonoBehaviour
         }
 
         IngredientData.IngredientType type = ingredient.Data.Type;
+        IngredientData.IngredientType collidingType = collidingIngredient.Data.Type;
         foreach(IngredientInitializer alreadyCollidingIngredient in alreadyCollidingIngredients)
         {
-            if(alreadyCollidingIngredient.Data.Type != type &&
-                    collidingIngredient.Data.Type != type &&
-                    alreadyCollidingIngredient.Data.Type != collidingIngredient.Data.Type)
+            IngredientData.IngredientType alreadyCollidingType = alreadyCollidingIngredient.Data.Type;
+            if(alreadyCollidingType != type &&
+                    collidingType != type &&
+                    alreadyCollidingType != collidingType)
             {
                 CanGeneratePlanet = true;
-                IngredientInitializer[] ingredients = new IngredientInitializer[]{collidingIngredient, alreadyCollidingIngredient, ingredient};
+                IngredientInitializer[] ingredients =
+                        new IngredientInitializer[]{collidingIngredient, alreadyCollidingIngredient, ingredient};
                 foreach(IngredientInitializer ingredient in ingredients)
                 {
                     switch(ingredient.Data.Type)
@@ -89,16 +94,17 @@ public class PlanetGenerator : MonoBehaviour
         {
             return;
         }
+
         alreadyCollidingIngredients.Remove(exitingIngredient);
     }
 
     private void HandleGeneration()
     {
+        // spawnPosition = Vector3.zero;
         foreach(IngredientInitializer ingredient in Ingredients.Values)
         {
-            spawnPosition += (Vector2) ingredient.transform.position;
-            Rigidbody2D rb = ingredient.GetComponent<Rigidbody2D>();
-            rb.velocity = Vector2.zero;
+            spawnPosition += ingredient.transform.position;
+            ingredient.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
             foreach(Collider2D collider in ingredient.GetComponentsInChildren<Collider2D>())
             {
@@ -109,7 +115,8 @@ public class PlanetGenerator : MonoBehaviour
 
         LeanTween.move(Ingredients[IngredientData.IngredientType.SOLID].gameObject, spawnPosition, 1f);
         LeanTween.move(Ingredients[IngredientData.IngredientType.LIQUID].gameObject, spawnPosition, 1f);
-        LeanTween.move(Ingredients[IngredientData.IngredientType.GASEOUS].gameObject, spawnPosition, 1f).setOnComplete(() => StartMergingAnimation());
+        LeanTween.move(Ingredients[IngredientData.IngredientType.GASEOUS].gameObject, spawnPosition, 1f)
+                .setOnComplete(() => StartMergingAnimation());
     }
 
     private void StartMergingAnimation()
@@ -122,22 +129,17 @@ public class PlanetGenerator : MonoBehaviour
 
     public void SpawnPlanet()
     {
-        Texture2D surface = null;
-        Texture2D pattern = null;
-        Color[] colors = new Color[2];
-        Texture2D extra = null;
-        Rigidbody2D rb;
+        string planetName = ComputeRandomName();
+        Texture2D surface = Ingredients[IngredientData.IngredientType.SOLID].Data.Surface;
+        Texture2D pattern = Ingredients[IngredientData.IngredientType.SOLID].Data.Pattern;
+        Color[] colors = Ingredients[IngredientData.IngredientType.LIQUID].Data.Colors;
+        Texture2D extra = Ingredients[IngredientData.IngredientType.GASEOUS].Data.Extra;
         float averageMass = 0;
         float averageDrag = 0;
         float averageAngularDrag = 0;
-
-        surface = Ingredients[IngredientData.IngredientType.SOLID].Data.Surface;
-        pattern = Ingredients[IngredientData.IngredientType.SOLID].Data.Pattern;
-        colors = Ingredients[IngredientData.IngredientType.LIQUID].Data.Colors;
-        extra = Ingredients[IngredientData.IngredientType.GASEOUS].Data.Extra;
         foreach(IngredientInitializer ingredient in Ingredients.Values)
         {
-            rb = ingredient.GetComponent<Rigidbody2D>();
+            Rigidbody2D rb = ingredient.GetComponent<Rigidbody2D>();
             averageMass += rb.mass;
             averageDrag += rb.drag;
             averageAngularDrag += rb.angularDrag;
@@ -145,25 +147,12 @@ public class PlanetGenerator : MonoBehaviour
         averageMass /= Ingredients.Count;
         averageDrag /= Ingredients.Count;
         averageAngularDrag /= Ingredients.Count;
+        PlanetData data = new PlanetData(planetName, surface, pattern, colors, extra,
+                averageMass, averageDrag, averageAngularDrag);
 
-        GameObject generatedPlanet = Instantiate(planetPrefab, spawnPosition, Quaternion.identity);
-        // generatedPlanet.GetComponent<Identifiable>().Name = ComputeRandomName();
-        // Debug.Log(generatedPlanet.GetComponent<Identifiable>().Name);
-        SpriteRenderer renderer = generatedPlanet.GetComponent<SpriteRenderer>();
-        renderer.material.SetTexture("_MainTex", surface);
-        renderer.material.SetTexture("_Pattern", pattern);
-        renderer.material.SetColor("_ColorA", colors[0]);
-        renderer.material.SetColor("_ColorB", colors[1]);
-        renderer.material.SetTexture("_Extra", extra);
-
-        rb = generatedPlanet.GetComponent<Rigidbody2D>();
-        rb.mass = averageMass;
-        rb.drag = averageDrag;
-        rb.angularDrag = averageAngularDrag;
-        generatedPlanet.GetComponent<CircleCollider2D>().radius = surface.width / 200;
-
-        generatedPlanet.transform.localScale = Vector3.zero;
-        generatedPlanet.GetComponent<SpringJoint2D>().enabled = false;
+        PlanetInitializer generatedPlanet = Instantiate(planetPrefab, spawnPosition, Quaternion.identity);
+        generatedPlanet.InitData(data);
+        generatedPlanet.Init(canvas, mainCamera);
     }
 
     private string ComputeRandomName()

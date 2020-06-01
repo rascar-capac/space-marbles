@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 43762714791358567}
-  detector: {fileID: 5658389451819108313}
+  detector: {fileID: 5859885224229009814}
 --- !u!114 &7779715798756765629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ingredient: {fileID: -2145331996283020571}
-  planetPrefab: {fileID: 5772475018381359505, guid: 04fccfb1215503e41819f400eff1987b,
+  planetPrefab: {fileID: -5441802930208253632, guid: 04fccfb1215503e41819f400eff1987b,
     type: 3}
   nameTemplates: {fileID: 11400000, guid: 5cb0722198d0f5642a6fa0d5464e1acf, type: 2}
   segmentsCount: 30
