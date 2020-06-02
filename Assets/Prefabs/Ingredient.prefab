@@ -501,5 +501,5 @@ MonoBehaviour:
   ingredient: {fileID: -2145331996283020571}
   planetPrefab: {fileID: -5441802930208253632, guid: 04fccfb1215503e41819f400eff1987b,
     type: 3}
-  nameTemplates: {fileID: 11400000, guid: 5cb0722198d0f5642a6fa0d5464e1acf, type: 2}
   segmentsCount: 30
+  nameData: {fileID: 4900000, guid: bb1b065022e0c11478f8bfcd7b2c0100, type: 3}

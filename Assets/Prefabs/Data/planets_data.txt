@@ -1,0 +1,10 @@
+#category
+template
+
+#template
+§1planet_synonym§ <2p> §2concept§ +2style_adjective+
+§1planet_synonym§ +1style_adjective+ +1personality_adjective+
+(§1first_name§-§1nickname§) <1> +1style_adjective+
+§1nickname§ §2matriculation§
+<0> +0style_adjective+ +0color+
+
