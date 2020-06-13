@@ -45,7 +45,7 @@ public abstract class A2DSpawner<T, U> : ASpawner<T, U>
     {
         T newObject = base.SpawnObject();
 
-        newObject.Init(canvas, mainCamera);
+        newObject.Init(this.gameObject, canvas, mainCamera);
 
         Vector2 randomPosition = Vector2.zero;
         bool isPositionValid = false;

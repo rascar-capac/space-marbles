@@ -9,12 +9,18 @@ public abstract class ADataInitializer<T> : MonoBehaviour
     public DataInitializedEvent OnDataInitialized => onDataInitialized;
 
     protected T data;
+    private GameObject gameManager;
     private DataInitializedEvent onDataInitialized;
 
     public virtual void InitData(T data)
     {
         this.data = data;
         onDataInitialized.Invoke(data);
+    }
+
+    protected void Init(GameObject gameManager)
+    {
+        this.gameManager = gameManager;
     }
 
     protected virtual void Awake()

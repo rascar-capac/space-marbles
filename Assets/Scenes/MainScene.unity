@@ -506,6 +506,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2987732625736831193, guid: 4e73cb6d15f74e844b30de65902da5b0,
         type: 3}
+      propertyPath: dataDeck.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2987732625736831193, guid: 4e73cb6d15f74e844b30de65902da5b0,
+        type: 3}
       propertyPath: spawnArea
       value: 
       objectReference: {fileID: 1875934136}
@@ -514,6 +519,31 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1675257588}
+    - target: {fileID: 2987732625736831193, guid: 4e73cb6d15f74e844b30de65902da5b0,
+        type: 3}
+      propertyPath: count
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2987732625736831193, guid: 4e73cb6d15f74e844b30de65902da5b0,
+        type: 3}
+      propertyPath: hasInitialMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2987732625736831193, guid: 4e73cb6d15f74e844b30de65902da5b0,
+        type: 3}
+      propertyPath: minGapBetweenObjects
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2987732625736831193, guid: 4e73cb6d15f74e844b30de65902da5b0,
+        type: 3}
+      propertyPath: maxInitialForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3533414235161348720, guid: 4e73cb6d15f74e844b30de65902da5b0,
+        type: 3}
+      propertyPath: dataDeck.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3533414235161348720, guid: 4e73cb6d15f74e844b30de65902da5b0,
         type: 3}
       propertyPath: spawnArea
@@ -524,6 +554,16 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1675257588}
+    - target: {fileID: 3533414235161348720, guid: 4e73cb6d15f74e844b30de65902da5b0,
+        type: 3}
+      propertyPath: count
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3533414235161348720, guid: 4e73cb6d15f74e844b30de65902da5b0,
+        type: 3}
+      propertyPath: minGapBetweenObjects
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7018855681671090820, guid: 4e73cb6d15f74e844b30de65902da5b0,
         type: 3}
       propertyPath: m_Name

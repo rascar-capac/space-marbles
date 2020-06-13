@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlanetInitializer : A2DDataInitializer<PlanetData>
 {
-    public override void Init(Canvas canvas, Camera mainCamera)
+    public override void Init(GameObject gameManager, Canvas canvas, Camera mainCamera)
     {
-        base.Init(canvas, mainCamera);
+        base.Init(gameManager, canvas, mainCamera);
 
         GetComponent<Identifiable>()?.Init(data.PlanetName, canvas, mainCamera);
+        GetComponent<HandlePlanetAnimationEvents>()?.Init(gameManager);
         transform.localScale = Vector3.zero;
         if(TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer))
         {

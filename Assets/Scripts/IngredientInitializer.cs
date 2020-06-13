@@ -8,9 +8,9 @@ public class IngredientInitializer : A2DDataInitializer<IngredientData>
     [SerializeField] private GameObject body = null;
     [SerializeField] private GameObject detector = null;
 
-    public override void Init(Canvas canvas, Camera mainCamera)
+    public override void Init(GameObject gameManager, Canvas canvas, Camera mainCamera)
     {
-        base.Init(canvas, mainCamera);
+        base.Init(gameManager, canvas, mainCamera);
 
         GetComponent<Identifiable>()?.Init(data.IngredientName, canvas, mainCamera);
         if(TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
@@ -30,6 +30,6 @@ public class IngredientInitializer : A2DDataInitializer<IngredientData>
         {
             renderer.sprite = data.BodySprite;
         }
-        detector.GetComponent<PlanetGenerator>()?.Init(data.InfluenceZone, canvas, mainCamera);
+        detector.GetComponent<PlanetGenerator>()?.Init(data.InfluenceZone, gameManager, canvas, mainCamera);
     }
 }

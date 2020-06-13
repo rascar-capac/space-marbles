@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2467139684503528281}
   - component: {fileID: 8119464661146267441}
   - component: {fileID: 6566823627241433620}
+  - component: {fileID: 6054875414979464310}
   m_Layer: 8
   m_Name: Star
   m_TagString: Untagged
@@ -104,6 +105,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 4105033330819034837}
+--- !u!114 &6054875414979464310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537882803223016396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12ef143beff1214f8a04d4eeabb6663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   orbitPrefab: {fileID: 7510012276086375478, guid: 6ca8815d5430fa34cb4067542f72545e,
     type: 3}
 --- !u!1 &4105033330819034837

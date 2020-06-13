@@ -16,12 +16,14 @@ public class PlanetGenerator : MonoBehaviour
     private List<IngredientInitializer> alreadyCollidingIngredients;
     private Vector3 spawnPosition;
     private LineRenderer lineRenderer;
+    private GameObject gameManager;
     private Camera mainCamera;
     private Canvas canvas;
 
-    public void Init(float influenceZone, Canvas canvas, Camera mainCamera)
+    public void Init(float influenceZone, GameObject gameManager, Canvas canvas, Camera mainCamera)
     {
         GetComponent<CircleCollider2D>().radius = influenceZone;
+        this.gameManager = gameManager;
         this.canvas = canvas;
         this.mainCamera = mainCamera;
     }
@@ -51,7 +53,7 @@ public class PlanetGenerator : MonoBehaviour
 
         PlanetInitializer generatedPlanet = Instantiate(planetPrefab, spawnPosition, Quaternion.identity);
         generatedPlanet.InitData(data);
-        generatedPlanet.Init(canvas, mainCamera);
+        generatedPlanet.Init(gameManager, canvas, mainCamera);
     }
 
     private void Awake()

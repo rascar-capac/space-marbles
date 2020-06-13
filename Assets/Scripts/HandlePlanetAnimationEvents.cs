@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class HandlePlanetAnimationEvents : MonoBehaviour
 {
-    private StarSpawner gameManager;
+    private GameObject gameManager;
 
-    private void Awake()
+    public void Init(GameObject gameManager)
     {
-        gameManager = FindObjectOfType<StarSpawner>();
+        this.gameManager = gameManager;
     }
 
     private void AttachToNearestOrbit()
@@ -26,17 +26,23 @@ public class HandlePlanetAnimationEvents : MonoBehaviour
     {
         Rigidbody2D nearestOrbitAnchor = null;
         float nearestOrbitAnchorDistance = float.MaxValue;
-        foreach(StarInitializer star in gameManager.SpawnedObjects)
+        if(gameManager.TryGetComponent<StarSpawner>(out StarSpawner spawner))
         {
-            foreach(OrbitHandler orbit in star.Orbits)
+            foreach(StarInitializer star in spawner.SpawnedObjects)
             {
-                if(!orbit.IsOccupied)
+                if(star.TryGetComponent<Orbitable>(out Orbitable orbitable))
                 {
-                    float distance = Vector2.Distance(transform.position, orbit.transform.position);
-                    if(distance < nearestOrbitAnchorDistance)
+                    foreach(OrbitHandler orbit in orbitable.Orbits)
                     {
-                        nearestOrbitAnchor = orbit.Anchor.GetComponent<Rigidbody2D>();
-                        nearestOrbitAnchorDistance = distance;
+                        if(!orbit.IsOccupied)
+                        {
+                            float distance = Vector2.Distance(transform.position, orbit.transform.position);
+                            if(distance < nearestOrbitAnchorDistance)
+                            {
+                                nearestOrbitAnchor = orbit.Anchor.GetComponent<Rigidbody2D>();
+                                nearestOrbitAnchorDistance = distance;
+                            }
+                        }
                     }
                 }
             }

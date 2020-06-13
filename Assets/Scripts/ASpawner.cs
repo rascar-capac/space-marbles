@@ -31,7 +31,6 @@ public abstract class ASpawner<T, U> : MonoBehaviour
 
     protected virtual T SpawnObject()
     {
-
         T prefab = prefabs.Count > 1 ? prefabs[Random.Range(0, prefabs.Count)] : prefabs[0];
         T newObject = Instantiate(prefab, parent);
         U data = PickRandomData(dataDeck, hasUniqueData);

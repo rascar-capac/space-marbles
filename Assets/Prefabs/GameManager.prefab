@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: -2145331996283020571, guid: 1a1333d3357813f4d8d947419c2f8b37, type: 3}
-  context: {fileID: 0}
+  parent: {fileID: 0}
   hasUniqueData: 0
   dataDeck:
   - {fileID: 11400000, guid: 8c85056ee9dc1e44ca09a894595de73a, type: 2}
@@ -58,6 +58,7 @@ MonoBehaviour:
   count: 100
   hasInitialMotion: 1
   minGapBetweenObjects: 5
+  canvas: {fileID: 0}
 --- !u!114 &3533414235161348720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,7 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 6566823627241433620, guid: 30984039ea212dc4c96e8dc4f196f460, type: 3}
-  context: {fileID: 0}
+  parent: {fileID: 0}
   hasUniqueData: 0
   dataDeck:
   - {fileID: 11400000, guid: 78577792f006fce4c8abc1deda053240, type: 2}
@@ -81,3 +82,4 @@ MonoBehaviour:
   count: 3
   hasInitialMotion: 0
   minGapBetweenObjects: 100
+  canvas: {fileID: 0}
