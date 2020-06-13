@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-[RequireComponent(typeof(OrbitHandler))]
+[RequireComponent(typeof(Orbiter))]
 public class OrbitRenderer : MonoBehaviour
 {
     [SerializeField] private int segmentsCount = 30;
 
     private LineRenderer lineRenderer;
-    private OrbitHandler orbitHandler;
+    private Orbiter orbitHandler;
     private Camera mainCamera;
 
     public void Init(Camera mainCamera)
@@ -20,7 +20,7 @@ public class OrbitRenderer : MonoBehaviour
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        orbitHandler = GetComponent<OrbitHandler>();
+        orbitHandler = GetComponent<Orbiter>();
     }
 
     private void LateUpdate()

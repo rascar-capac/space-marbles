@@ -5,13 +5,13 @@ using System.Linq;
 
 public class Orbitable : MonoBehaviour
 {
-    public List<OrbitHandler> Orbits { get; set; }
+    public List<Orbiter> Orbits { get; set; }
 
-    [SerializeField] private OrbitHandler orbitPrefab = null;
+    [SerializeField] private Orbiter orbitPrefab = null;
 
     private void Awake()
     {
-        Orbits = new List<OrbitHandler>();
+        Orbits = new List<Orbiter>();
     }
 
     public void Init(StarData data, Camera mainCamera)
@@ -30,7 +30,7 @@ public class Orbitable : MonoBehaviour
 
         for(int i = 0 ; i < sizes.Count ; i++)
         {
-            OrbitHandler orbit = Instantiate(orbitPrefab, transform);
+            Orbiter orbit = Instantiate(orbitPrefab, transform);
 
             orbit.Width = sizes[i].x;
             orbit.Heigth = sizes[i].y;

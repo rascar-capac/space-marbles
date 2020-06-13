@@ -3,8 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class Collidable : MonoBehaviour
+public class AnimCollidable : MonoBehaviour
 {
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.collider.TryGetComponent<StarInitializer>(out StarInitializer star))
@@ -13,11 +20,11 @@ public class Collidable : MonoBehaviour
             {
                 collider.enabled = false;
             }
-            GetComponent<Animator>().SetTrigger("CollideWithStar");
+            animator.SetTrigger("CollideWithStar");
         }
         else
         {
-            GetComponent<Animator>().SetTrigger("Collide");
+            animator.SetTrigger("Collide");
         }
     }
 }

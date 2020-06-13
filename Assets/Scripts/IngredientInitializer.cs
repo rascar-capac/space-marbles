@@ -13,7 +13,6 @@ public class IngredientInitializer : A2DDataInitializer<IngredientData>
         base.Init(gameManager, canvas, mainCamera);
 
         GetComponent<Identifiable>()?.Init(data.IngredientName, canvas, mainCamera);
-        GetComponent<HandleIngredientAnimationEvents>()?.Init(gameManager);
         GetComponent<Shootable>()?.Init(mainCamera);
         if(TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
         {
@@ -32,6 +31,6 @@ public class IngredientInitializer : A2DDataInitializer<IngredientData>
         {
             renderer.sprite = data.BodySprite;
         }
-        detector.GetComponent<PlanetGenerator>()?.Init(data.InfluenceZone, gameManager, canvas, mainCamera);
+        detector.GetComponent<Mergable>()?.Init(data.InfluenceZone, gameManager, canvas, mainCamera);
     }
 }
