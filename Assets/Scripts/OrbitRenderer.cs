@@ -12,11 +12,15 @@ public class OrbitRenderer : MonoBehaviour
     private OrbitHandler orbitHandler;
     private Camera mainCamera;
 
+    public void Init(Camera mainCamera)
+    {
+        this.mainCamera = mainCamera;
+    }
+
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
         orbitHandler = GetComponent<OrbitHandler>();
-        mainCamera = Camera.main;
     }
 
     private void LateUpdate()

@@ -14,9 +14,13 @@ public class Shootable : MonoBehaviour
     private Vector2 mouseOffset;
     private AnimShootable anim;
 
+    public void Init(Camera mainCamera)
+    {
+        this.mainCamera = mainCamera;
+    }
+
     private void Awake()
     {
-        mainCamera = Camera.main;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<AnimShootable>();
     }

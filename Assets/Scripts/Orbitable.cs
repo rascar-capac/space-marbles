@@ -14,7 +14,7 @@ public class Orbitable : MonoBehaviour
         Orbits = new List<OrbitHandler>();
     }
 
-    public void Init(StarData data)
+    public void Init(StarData data, Camera mainCamera)
     {
         int orbitCount = Random.Range(data.MinCount, data.MaxCount + 1);
 
@@ -38,6 +38,8 @@ public class Orbitable : MonoBehaviour
             orbit.Period = Random.Range(data.MinPeriod, data.MaxPeriod);
 
             orbit.IsClockwise = data.IsClockwiseOnly ? true : Random.value < 0.5f;
+
+            orbit.GetComponent<OrbitRenderer>()?.Init(mainCamera);
 
             Orbits.Add(orbit);
         }

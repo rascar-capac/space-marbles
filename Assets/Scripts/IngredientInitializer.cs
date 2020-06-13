@@ -14,6 +14,7 @@ public class IngredientInitializer : A2DDataInitializer<IngredientData>
 
         GetComponent<Identifiable>()?.Init(data.IngredientName, canvas, mainCamera);
         GetComponent<HandleIngredientAnimationEvents>()?.Init(gameManager);
+        GetComponent<Shootable>()?.Init(mainCamera);
         if(TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
         {
             rb.mass = data.Mass;

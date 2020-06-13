@@ -16,6 +16,6 @@ public class StarInitializer : A2DDataInitializer<StarData>
             renderer.sprite = data.BodySprites[Random.Range(0, data.BodySprites.Count)];
         }
 
-        GetComponent<Orbitable>()?.Init(data);
+        GetComponent<Orbitable>()?.Init(data, mainCamera);
     }
 }
