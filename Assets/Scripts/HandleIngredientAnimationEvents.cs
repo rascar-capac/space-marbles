@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class HandleIngredientAnimationEvents : MonoBehaviour
 {
-    private IngredientSpawner gameManager;
+    private GameObject gameManager;
 
-    private void Awake()
+    public void Init(GameObject gameManager)
     {
-        gameManager = FindObjectOfType<IngredientSpawner>();
+        this.gameManager = gameManager;
     }
 
     private void SpawnPlanet()
@@ -22,6 +22,6 @@ public class HandleIngredientAnimationEvents : MonoBehaviour
 
     private void DestroyIngredient()
     {
-        gameManager.DestroySpawnedObject(this.GetComponent<IngredientInitializer>());
+        gameManager.GetComponent<IngredientSpawner>()?.DestroySpawnedObject(GetComponent<IngredientInitializer>());
     }
 }
