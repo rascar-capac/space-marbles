@@ -9,8 +9,8 @@ public abstract class ADataInitializer<T> : MonoBehaviour
     public DataInitializedEvent OnDataInitialized => onDataInitialized;
 
     protected T data;
-    private GameObject gameManager;
     private DataInitializedEvent onDataInitialized;
+    private GameObject gameManager;
 
     public virtual void InitData(T data)
     {

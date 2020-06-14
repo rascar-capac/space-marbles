@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Dragable : MonoBehaviour
 {
-    [SerializeField] [Range(0, 1f)] private float sensitivity = .5f;
-
     public bool IsAiming { get; set; }
 
+    [SerializeField] [Range(0, 1f)] private float sensitivity = 0.5f;
     private Camera mainCamera;
 
     private void Awake()

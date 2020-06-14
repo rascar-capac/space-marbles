@@ -242,5 +242,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb0b7b1e8ae8314c9852964c5bc0130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nameLabel: {fileID: 6158695698407174521}
-  _typeLabel: {fileID: 0}
+  nameLabel: {fileID: 6158695698407174521}
+  typeLabel: {fileID: 0}

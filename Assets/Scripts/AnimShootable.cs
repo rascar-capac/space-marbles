@@ -6,11 +6,6 @@ public class AnimShootable : MonoBehaviour
 {
     private Animator animator;
 
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
-
     public void SetSpeed(float speed)
     {
         animator.SetFloat("Speed", speed);
@@ -29,5 +24,10 @@ public class AnimShootable : MonoBehaviour
     public void SetAimLevel(int aimLevel)
     {
         animator.SetInteger("AimLevel", aimLevel);
+    }
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
     }
 }

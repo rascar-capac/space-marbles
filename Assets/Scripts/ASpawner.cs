@@ -8,10 +8,9 @@ public abstract class ASpawner<T, U> : MonoBehaviour
     public List<T> SpawnedObjects => spawnedObjects;
 
     [SerializeField] private List<T> prefabs = null;
-    [SerializeField] private Transform parent = null;
+    [SerializeField] private List<U> dataDeck = null;
     [SerializeField] private bool hasUniqueData = false;
-    [SerializeField] protected List<U> dataDeck = null;
-
+    [SerializeField] private Transform parent = null;
     protected List<T> spawnedObjects;
 
     public void AddData(U newData)
@@ -22,6 +21,12 @@ public abstract class ASpawner<T, U> : MonoBehaviour
     public void AddData(List<U> newData)
     {
         dataDeck.AddRange(newData);
+    }
+
+    public void DestroySpawnedObject(T spawnedObject)
+    {
+        spawnedObjects.Remove(spawnedObject);
+        Destroy(spawnedObject);
     }
 
     protected virtual void Awake()
@@ -48,11 +53,5 @@ public abstract class ASpawner<T, U> : MonoBehaviour
             deck.Remove(data);
         }
         return data;
-    }
-
-    public void DestroySpawnedObject(T spawnedObject)
-    {
-        spawnedObjects.Remove(spawnedObject);
-        Destroy(spawnedObject);
     }
 }

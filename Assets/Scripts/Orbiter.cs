@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class Orbiter : MonoBehaviour
 {
-    [SerializeField] private Transform _anchor = null;
-
-    public float Width { get; set; }
-    public float Heigth { get; set; }
-    public float Period { get; set; }
-    public bool IsClockwise { get; set; }
+    public Transform Anchor => anchor;
     public bool IsOccupied { get; set; }
-    public Transform Anchor { get => _anchor; }
 
+    [SerializeField] private Transform anchor = null;
+    private float width;
+    private float heigth;
+    private float period;
+    private bool isClockwise;
     private float timer;
+
+    public void Init(float width, float height, float period, bool isClockwise, Camera mainCamera)
+    {
+        this.width = width;
+        this.heigth = height;
+        this.period = period;
+        this.isClockwise = isClockwise;
+        GetComponent<OrbitRenderer>()?.Init(mainCamera);
+    }
 
     private void Start()
     {
@@ -23,15 +31,15 @@ public class Orbiter : MonoBehaviour
 
     private void Update()
     {
-        Anchor.localPosition = Evaluate(timer / Period);
-        timer = Mathf.Repeat(timer + Time.deltaTime, Period);
+        anchor.localPosition = Evaluate(timer / period);
+        timer = Mathf.Repeat(timer + Time.deltaTime, period);
     }
 
     public Vector2 Evaluate(float t)
     {
-        float radAngle = (IsClockwise ? 360 - 360 * t : 360 * t) * Mathf.Deg2Rad;
-        float x = Mathf.Cos(radAngle) * Width;
-        float y = Mathf.Sin(radAngle) * Heigth;
+        float radAngle = (isClockwise ? 360 - 360 * t : 360 * t) * Mathf.Deg2Rad;
+        float x = Mathf.Cos(radAngle) * width;
+        float y = Mathf.Sin(radAngle) * heigth;
         return new Vector2(x, y);
     }
 }

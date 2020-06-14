@@ -5,18 +5,17 @@ using TMPro;
 
 public class PanelUpdater : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _nameLabel = null;
-    [SerializeField] private TextMeshProUGUI _typeLabel = null;
-
     public string NameLabel
     {
-        get => _nameLabel.text;
-        set => _nameLabel.text = value;
+        get => nameLabel.text;
+        set => nameLabel.text = value;
     }
-
     public string TypeLabel
     {
-        get => _typeLabel.text;
-        set => _typeLabel.text = value;
+        get => typeLabel.text;
+        set => typeLabel.text = value;
     }
+
+    [SerializeField] private TextMeshProUGUI nameLabel = null;
+    [SerializeField] private TextMeshProUGUI typeLabel = null;
 }

@@ -12,8 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6eddff750b338b4e9043ba3c1cb6c2d, type: 3}
   m_Name: Ingredient_A_0
   m_EditorClassIdentifier: 
-  _ingredientName: Magicien
-  _namingElements:
+  ingredientName: Magicien
+  bodySprite: {fileID: 21300000, guid: a52d5ea062f9333498148aafa2d23442, type: 3}
+  mass: 5
+  drag: 2
+  angularDrag: 0.5
+  physicsMaterial: {fileID: 6200000, guid: 7755caf1112162c46b1ac5e88cdeb93e, type: 2}
+  precision: 1
+  animatorController: {fileID: 22100000, guid: ce821b6639322124bbe9d8698423a127, type: 2}
+  type: 0
+  influenceZone: 2
+  namingElements:
     planetSynonym:
       hasContractedArticle: 1
       word: astre
@@ -32,7 +41,7 @@ MonoBehaviour:
     nickname:
       hasContractedArticle: 0
       word: Orion
-      genre: 1
+      genre: 0
       plurality: 0
     matriculation:
       hasContractedArticle: 0
@@ -60,17 +69,7 @@ MonoBehaviour:
       singularMasculine: 
       pluralFeminine: 
       pluralMasculine: 
-  _bodySprite: {fileID: 21300000, guid: a52d5ea062f9333498148aafa2d23442, type: 3}
-  _type: 0
-  _surface: {fileID: 2800000, guid: f1baa92f8dd443d428965129c6148f4e, type: 3}
-  _pattern: {fileID: 2800000, guid: fae2d328e91d37b4f823d061c4776ced, type: 3}
-  _colors: []
-  _extra: {fileID: 0}
-  _mass: 5
-  _drag: 2
-  _angularDrag: 0.5
-  _physicsMaterial: {fileID: 6200000, guid: 7755caf1112162c46b1ac5e88cdeb93e, type: 2}
-  _precision: 1
-  _influenceZone: 2
-  _animatorController: {fileID: 22100000, guid: ce821b6639322124bbe9d8698423a127,
-    type: 2}
+  surface: {fileID: 2800000, guid: f1baa92f8dd443d428965129c6148f4e, type: 3}
+  pattern: {fileID: 2800000, guid: fae2d328e91d37b4f823d061c4776ced, type: 3}
+  colors: []
+  extra: {fileID: 0}

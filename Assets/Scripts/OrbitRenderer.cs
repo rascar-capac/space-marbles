@@ -7,10 +7,9 @@ using UnityEngine;
 public class OrbitRenderer : MonoBehaviour
 {
     [SerializeField] private int segmentsCount = 30;
-
+    private Camera mainCamera;
     private LineRenderer lineRenderer;
     private Orbiter orbitHandler;
-    private Camera mainCamera;
 
     public void Init(Camera mainCamera)
     {

@@ -7,18 +7,16 @@ public class Mergable : MonoBehaviour
 {
     [SerializeField] private IngredientInitializer ingredient = null;
     [SerializeField] private PlanetInitializer planetPrefab = null;
-    [SerializeField] private int segmentsCount = 30;
     [SerializeField] private TextAsset nameData = null;
-
-    public Dictionary<IngredientData.IngredientType, IngredientInitializer> Ingredients { get; set; }
-    public bool CanGeneratePlanet { get; set; }
-
-    private List<IngredientInitializer> alreadyCollidingIngredients;
-    private Vector3 spawnPosition;
+    [SerializeField] private int segmentsCount = 30;
     private LineRenderer lineRenderer;
     private GameObject gameManager;
-    private Camera mainCamera;
     private Canvas canvas;
+    private Camera mainCamera;
+    private Dictionary<IngredientData.IngredientType, IngredientInitializer> ingredients;
+    private List<IngredientInitializer> alreadyCollidingIngredients;
+    private bool canGeneratePlanet;
+    private Vector3 spawnPosition;
 
     public void Init(float influenceZone, GameObject gameManager, Canvas canvas, Camera mainCamera)
     {
@@ -30,26 +28,26 @@ public class Mergable : MonoBehaviour
 
     public void SpawnPlanet()
     {
-        if(CanGeneratePlanet)
+        if(canGeneratePlanet)
         {
             string planetName = ComputeRandomName();
-            Texture2D surface = Ingredients[IngredientData.IngredientType.SOLID].Data.Surface;
-            Texture2D pattern = Ingredients[IngredientData.IngredientType.SOLID].Data.Pattern;
-            Color[] colors = Ingredients[IngredientData.IngredientType.LIQUID].Data.Colors;
-            Texture2D extra = Ingredients[IngredientData.IngredientType.GASEOUS].Data.Extra;
+            Texture2D surface = ingredients[IngredientData.IngredientType.SOLID].Data.Surface;
+            Texture2D pattern = ingredients[IngredientData.IngredientType.SOLID].Data.Pattern;
+            Color[] colors = ingredients[IngredientData.IngredientType.LIQUID].Data.Colors;
+            Texture2D extra = ingredients[IngredientData.IngredientType.GASEOUS].Data.Extra;
             float averageMass = 0;
             float averageDrag = 0;
             float averageAngularDrag = 0;
-            foreach(IngredientInitializer ingredient in Ingredients.Values)
+            foreach(IngredientInitializer ingredient in ingredients.Values)
             {
                 Rigidbody2D rb = ingredient.GetComponent<Rigidbody2D>();
                 averageMass += rb.mass;
                 averageDrag += rb.drag;
                 averageAngularDrag += rb.angularDrag;
             }
-            averageMass /= Ingredients.Count;
-            averageDrag /= Ingredients.Count;
-            averageAngularDrag /= Ingredients.Count;
+            averageMass /= ingredients.Count;
+            averageDrag /= ingredients.Count;
+            averageAngularDrag /= ingredients.Count;
             PlanetData data = new PlanetData(planetName, surface, pattern, colors, extra,
                     averageMass, averageDrag, averageAngularDrag);
 
@@ -66,10 +64,10 @@ public class Mergable : MonoBehaviour
 
     private void Awake()
     {
-        alreadyCollidingIngredients = new List<IngredientInitializer>();
-        Ingredients = new Dictionary<IngredientData.IngredientType, IngredientInitializer>();
         lineRenderer = GetComponent<LineRenderer>();
-        CanGeneratePlanet = false;
+        alreadyCollidingIngredients = new List<IngredientInitializer>();
+        ingredients = new Dictionary<IngredientData.IngredientType, IngredientInitializer>();
+        canGeneratePlanet = false;
     }
 
     private void LateUpdate()
@@ -94,7 +92,7 @@ public class Mergable : MonoBehaviour
                     collidingType != type &&
                     alreadyCollidingType != collidingType)
             {
-                CanGeneratePlanet = true;
+                canGeneratePlanet = true;
                 IngredientInitializer[] ingredients =
                         new IngredientInitializer[]{collidingIngredient, alreadyCollidingIngredient, ingredient};
                 foreach(IngredientInitializer ingredient in ingredients)
@@ -102,20 +100,20 @@ public class Mergable : MonoBehaviour
                     switch(ingredient.Data.Type)
                     {
                         case IngredientData.IngredientType.SOLID :
-                            Ingredients.Add(IngredientData.IngredientType.SOLID, ingredient);
+                            this.ingredients.Add(IngredientData.IngredientType.SOLID, ingredient);
                             break;
                         case IngredientData.IngredientType.LIQUID :
-                            Ingredients.Add(IngredientData.IngredientType.LIQUID, ingredient);
+                            this.ingredients.Add(IngredientData.IngredientType.LIQUID, ingredient);
                             break;
                         default :
-                            Ingredients.Add(IngredientData.IngredientType.GASEOUS, ingredient);
+                            this.ingredients.Add(IngredientData.IngredientType.GASEOUS, ingredient);
                             break;
                     }
                 }
                 break;
             }
         }
-        if(CanGeneratePlanet)
+        if(canGeneratePlanet)
         {
             HandleGeneration();
         }
@@ -139,7 +137,7 @@ public class Mergable : MonoBehaviour
     private void HandleGeneration()
     {
         // spawnPosition = Vector3.zero;
-        foreach(IngredientInitializer ingredient in Ingredients.Values)
+        foreach(IngredientInitializer ingredient in ingredients.Values)
         {
             spawnPosition += ingredient.transform.position;
             ingredient.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -149,19 +147,19 @@ public class Mergable : MonoBehaviour
                 collider.enabled = false;
             }
         }
-        spawnPosition /= Ingredients.Count;
+        spawnPosition /= ingredients.Count;
 
-        LeanTween.move(Ingredients[IngredientData.IngredientType.SOLID].gameObject, spawnPosition, 1f);
-        LeanTween.move(Ingredients[IngredientData.IngredientType.LIQUID].gameObject, spawnPosition, 1f);
-        LeanTween.move(Ingredients[IngredientData.IngredientType.GASEOUS].gameObject, spawnPosition, 1f)
+        LeanTween.move(ingredients[IngredientData.IngredientType.SOLID].gameObject, spawnPosition, 1f);
+        LeanTween.move(ingredients[IngredientData.IngredientType.LIQUID].gameObject, spawnPosition, 1f);
+        LeanTween.move(ingredients[IngredientData.IngredientType.GASEOUS].gameObject, spawnPosition, 1f)
                 .setOnComplete(() => StartMergingAnimation());
     }
 
     private void StartMergingAnimation()
     {
-        foreach(IngredientInitializer ingredient in Ingredients.Values)
+        foreach(IngredientInitializer ingredient in ingredients.Values)
         {
-            ingredient.GetComponent<AnimMergable>().SetMerge();
+            ingredient.GetComponent<AnimMergable>().Merge();
         }
     }
 
@@ -169,7 +167,7 @@ public class Mergable : MonoBehaviour
     {
         Dictionary<string, string[]> categoryElements = TextGenerator.FetchCategories(nameData.text);
         string template = TextGenerator.PickRandom("template", categoryElements);
-        return TextGenerator.Format(template, Ingredients);
+        return TextGenerator.Format(template, ingredients);
     }
 
     private void ComputeLine()

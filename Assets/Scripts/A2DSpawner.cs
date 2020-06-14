@@ -6,14 +6,13 @@ public abstract class A2DSpawner<T, U> : ASpawner<T, U>
         where T : A2DDataInitializer<U>
 {
     [SerializeField] private Collider2D spawnArea = null;
-    [SerializeField] private float maxInitialForce = 10f;
     [SerializeField] private int count = 0;
-    [SerializeField] private bool hasInitialMotion = false;
     [SerializeField] private float minGapBetweenObjects = 30f;
+    [SerializeField] private bool hasInitialMotion = false;
+    [SerializeField] private float maxInitialForce = 10f;
     [SerializeField] private Canvas canvas = null;
-
-    private bool isCircle;
     private CircleCollider2D circularArea;
+    private bool isCircle;
     private float spawnX;
     private float spawnY;
     private Camera mainCamera;

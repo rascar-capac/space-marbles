@@ -8,11 +8,10 @@ public class Shootable : MonoBehaviour
     [SerializeField] private float power = 10f;
     [SerializeField] private float maxRadius = 10f;
     [SerializeField] private float maxPrecisionOffset = 30f;
-
     private Camera mainCamera;
     private Rigidbody2D rb;
-    private Vector2 mouseOffset;
     private AnimShootable anim;
+    private Vector2 mouseOffset;
 
     public void Init(Camera mainCamera)
     {

@@ -7,7 +7,7 @@ public class AnimMergable : MonoBehaviour
     [SerializeField] private Mergable detector = null;
     private Animator animator;
 
-    public void SetMerge()
+    public void Merge()
     {
         animator.SetTrigger("Merge");
     }

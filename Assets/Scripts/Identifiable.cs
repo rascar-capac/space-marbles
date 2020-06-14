@@ -6,20 +6,13 @@ using TMPro;
 
 public class Identifiable : MonoBehaviour
 {
-    [SerializeField] private float panelOffset = 10f;
     [SerializeField] private PanelUpdater idPanelPrefab = null;
-
-    private PanelUpdater idPanel;
+    [SerializeField] private float panelOffset = 10f;
     private Canvas canvas;
     private Camera mainCamera;
+    private PanelUpdater idPanel;
     private bool isMouseDown;
     private bool isMouseOver;
-
-    private void Awake()
-    {
-        isMouseDown = false;
-        isMouseOver = false;
-    }
 
     public void Init(string name, Canvas canvas, Camera mainCamera)
     {
@@ -28,6 +21,12 @@ public class Identifiable : MonoBehaviour
         idPanel = Instantiate(idPanelPrefab, canvas.transform);
         idPanel.NameLabel = name;
         idPanel.gameObject.SetActive(false);
+    }
+
+    private void Awake()
+    {
+        isMouseDown = false;
+        isMouseOver = false;
     }
 
     private void OnMouseDown()

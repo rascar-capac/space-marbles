@@ -5,14 +5,10 @@ using System.Linq;
 
 public class Orbitable : MonoBehaviour
 {
-    public List<Orbiter> Orbits { get; set; }
+    public List<Orbiter> Orbits => orbits;
 
     [SerializeField] private Orbiter orbitPrefab = null;
-
-    private void Awake()
-    {
-        Orbits = new List<Orbiter>();
-    }
+    private List<Orbiter> orbits;
 
     public void Init(StarData data, Camera mainCamera)
     {
@@ -32,17 +28,19 @@ public class Orbitable : MonoBehaviour
         {
             Orbiter orbit = Instantiate(orbitPrefab, transform);
 
-            orbit.Width = sizes[i].x;
-            orbit.Heigth = sizes[i].y;
+            float width = sizes[i].x;
+            float height = sizes[i].y;
+            float period = Random.Range(data.MinPeriod, data.MaxPeriod);
+            bool isClockwise = data.IsClockwiseOnly ? true : Random.value < 0.5f;
 
-            orbit.Period = Random.Range(data.MinPeriod, data.MaxPeriod);
-
-            orbit.IsClockwise = data.IsClockwiseOnly ? true : Random.value < 0.5f;
-
-            orbit.GetComponent<OrbitRenderer>()?.Init(mainCamera);
-
-            Orbits.Add(orbit);
+            orbit.Init(width, height, period, isClockwise, mainCamera);
+            orbits.Add(orbit);
         }
+    }
+
+    private void Awake()
+    {
+        orbits = new List<Orbiter>();
     }
 
     private List<Vector2> ComputeOverlappingSizes(int sizeCount, StarData data)

@@ -12,8 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6eddff750b338b4e9043ba3c1cb6c2d, type: 3}
   m_Name: Ingredient_A_1
   m_EditorClassIdentifier: 
-  _ingredientName: Charmeur
-  _namingElements:
+  ingredientName: Charmeur
+  bodySprite: {fileID: 21300000, guid: 0c687a8bd6a2ffc4583aef93909aac76, type: 3}
+  mass: 5
+  drag: 1
+  angularDrag: 2
+  physicsMaterial: {fileID: 6200000, guid: e83bb2f5ee3960649bb8a4f0a7905bfc, type: 2}
+  precision: 1
+  animatorController: {fileID: 22100000, guid: 29cf419aa5e07e241a6c2eec5a002c62, type: 2}
+  type: 0
+  influenceZone: 1
+  namingElements:
     planetSynonym:
       hasContractedArticle: 0
       word: boule
@@ -60,17 +69,7 @@ MonoBehaviour:
       singularMasculine: 
       pluralFeminine: 
       pluralMasculine: 
-  _bodySprite: {fileID: 21300000, guid: 0c687a8bd6a2ffc4583aef93909aac76, type: 3}
-  _type: 0
-  _surface: {fileID: 2800000, guid: a19521d2fd29a6b42b4e893bebc05bec, type: 3}
-  _pattern: {fileID: 2800000, guid: fae2d328e91d37b4f823d061c4776ced, type: 3}
-  _colors: []
-  _extra: {fileID: 0}
-  _mass: 5
-  _drag: 1
-  _angularDrag: 2
-  _physicsMaterial: {fileID: 6200000, guid: e83bb2f5ee3960649bb8a4f0a7905bfc, type: 2}
-  _precision: 1
-  _influenceZone: 1
-  _animatorController: {fileID: 22100000, guid: 29cf419aa5e07e241a6c2eec5a002c62,
-    type: 2}
+  surface: {fileID: 2800000, guid: a19521d2fd29a6b42b4e893bebc05bec, type: 3}
+  pattern: {fileID: 2800000, guid: fae2d328e91d37b4f823d061c4776ced, type: 3}
+  colors: []
+  extra: {fileID: 0}

@@ -12,8 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6eddff750b338b4e9043ba3c1cb6c2d, type: 3}
   m_Name: Ingredient_B_0
   m_EditorClassIdentifier: 
-  _ingredientName: Sensible
-  _namingElements:
+  ingredientName: Sensible
+  bodySprite: {fileID: 21300000, guid: 500a632f517f2464f9e3f92cf201f634, type: 3}
+  mass: 3
+  drag: 2
+  angularDrag: 0.5
+  physicsMaterial: {fileID: 6200000, guid: d4ade9bc0bac01042b2f3b8d2ed4e6f5, type: 2}
+  precision: 1
+  animatorController: {fileID: 22100000, guid: ff880e17f6e1cdc419fc8f328284124a, type: 2}
+  type: 1
+  influenceZone: 3
+  namingElements:
     planetSynonym:
       hasContractedArticle: 0
       word: 
@@ -60,19 +69,9 @@ MonoBehaviour:
       singularMasculine: bleu
       pluralFeminine: bleues
       pluralMasculine: bleus
-  _bodySprite: {fileID: 21300000, guid: 500a632f517f2464f9e3f92cf201f634, type: 3}
-  _type: 1
-  _surface: {fileID: 0}
-  _pattern: {fileID: 0}
-  _colors:
-  - {r: 0, g: 0.25349808, b: 1, a: 1}
-  - {r: 1, g: 0, b: 0.77873516, a: 1}
-  _extra: {fileID: 0}
-  _mass: 3
-  _drag: 2
-  _angularDrag: 0.5
-  _physicsMaterial: {fileID: 6200000, guid: d4ade9bc0bac01042b2f3b8d2ed4e6f5, type: 2}
-  _precision: 1
-  _influenceZone: 3
-  _animatorController: {fileID: 22100000, guid: ff880e17f6e1cdc419fc8f328284124a,
-    type: 2}
+  surface: {fileID: 0}
+  pattern: {fileID: 0}
+  colors:
+  - {r: 0, g: 0.16586065, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.6586304, a: 1}
+  extra: {fileID: 0}

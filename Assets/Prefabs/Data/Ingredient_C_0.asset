@@ -12,8 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6eddff750b338b4e9043ba3c1cb6c2d, type: 3}
   m_Name: Ingredient_C_0
   m_EditorClassIdentifier: 
-  _ingredientName: Grincheux
-  _namingElements:
+  ingredientName: Grincheux
+  bodySprite: {fileID: 21300000, guid: 99427a585c34bf945b1e128eb8ad0477, type: 3}
+  mass: 1
+  drag: 1
+  angularDrag: 0
+  physicsMaterial: {fileID: 6200000, guid: d4ade9bc0bac01042b2f3b8d2ed4e6f5, type: 2}
+  precision: 0.5
+  animatorController: {fileID: 22100000, guid: 46114c3dddc39cf4ca7a6c2ea948416c, type: 2}
+  type: 2
+  influenceZone: 2
+  namingElements:
     planetSynonym:
       hasContractedArticle: 0
       word: 
@@ -44,8 +53,8 @@ MonoBehaviour:
       invariable: 
       singularFeminine: grincheuse
       singularMasculine: grincheux
-      pluralFeminine: grincheuse
-      pluralMasculine: grincheuses
+      pluralFeminine: grincheuses
+      pluralMasculine: grincheux
     personalityAdjective:
       hasContractedArticle: 0
       invariable: 
@@ -60,17 +69,7 @@ MonoBehaviour:
       singularMasculine: 
       pluralFeminine: 
       pluralMasculine: 
-  _bodySprite: {fileID: 21300000, guid: 99427a585c34bf945b1e128eb8ad0477, type: 3}
-  _type: 2
-  _surface: {fileID: 0}
-  _pattern: {fileID: 0}
-  _colors: []
-  _extra: {fileID: 2800000, guid: cea663c1fb72d0d4baf09ca24c84cf9c, type: 3}
-  _mass: 1
-  _drag: 1
-  _angularDrag: 0
-  _physicsMaterial: {fileID: 6200000, guid: d4ade9bc0bac01042b2f3b8d2ed4e6f5, type: 2}
-  _precision: 0.5
-  _influenceZone: 2
-  _animatorController: {fileID: 22100000, guid: 46114c3dddc39cf4ca7a6c2ea948416c,
-    type: 2}
+  surface: {fileID: 0}
+  pattern: {fileID: 0}
+  colors: []
+  extra: {fileID: 2800000, guid: cea663c1fb72d0d4baf09ca24c84cf9c, type: 3}

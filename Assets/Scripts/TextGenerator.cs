@@ -43,19 +43,19 @@ public static class TextGenerator
             switch(placeholder)
             {
                 case "planet_synonym" :
-                    noun = ingredients[IngredientData.IngredientType.SOLID].Data.NamingElements.planetSynonym;
+                    noun = ingredients[IngredientData.IngredientType.SOLID].Data.NamingElements.PlanetSynonym;
                     break;
                 case "concept" :
-                    noun = ingredients[IngredientData.IngredientType.SOLID].Data.NamingElements.concept;
+                    noun = ingredients[IngredientData.IngredientType.SOLID].Data.NamingElements.Concept;
                     break;
                 case "first_name" :
-                    noun = ingredients[IngredientData.IngredientType.LIQUID].Data.NamingElements.firstName;
+                    noun = ingredients[IngredientData.IngredientType.LIQUID].Data.NamingElements.FirstName;
                     break;
                 case "nickname" :
-                    noun = ingredients[IngredientData.IngredientType.SOLID].Data.NamingElements.nickname;
+                    noun = ingredients[IngredientData.IngredientType.SOLID].Data.NamingElements.Nickname;
                     break;
                 case "matriculation" :
-                    noun = ingredients[IngredientData.IngredientType.GASEOUS].Data.NamingElements.matriculation;
+                    noun = ingredients[IngredientData.IngredientType.GASEOUS].Data.NamingElements.Matriculation;
                     break;
                 default :
                     noun = null;
@@ -63,7 +63,7 @@ public static class TextGenerator
             }
             matchingNouns.Insert(matchingIndex, noun);
 
-            rawString = ReplaceTextBetween("§", "§", noun.word, rawString);
+            rawString = ReplaceTextBetween("§", "§", noun.Word, rawString);
         }
 
         while(rawString.Contains("+"))
@@ -76,13 +76,13 @@ public static class TextGenerator
             switch(placeholder)
             {
                 case "style_adjective" :
-                    qualifier = ingredients[IngredientData.IngredientType.GASEOUS].Data.NamingElements.styleAdjective;
+                    qualifier = ingredients[IngredientData.IngredientType.GASEOUS].Data.NamingElements.StyleAdjective;
                     break;
                 case "personality_adjective" :
-                    qualifier = ingredients[IngredientData.IngredientType.LIQUID].Data.NamingElements.personalityAdjective;
+                    qualifier = ingredients[IngredientData.IngredientType.LIQUID].Data.NamingElements.PersonalityAdjective;
                     break;
                 case "color" :
-                    qualifier = ingredients[IngredientData.IngredientType.LIQUID].Data.NamingElements.color;
+                    qualifier = ingredients[IngredientData.IngredientType.LIQUID].Data.NamingElements.Color;
                     break;
                 default :
                     qualifier = null;
@@ -145,30 +145,30 @@ public static class TextGenerator
 
     private static string MatchQualifier(IngredientData.Qualifier qualifier, IngredientData.Noun noun)
     {
-        if(qualifier.invariable != "")
+        if(qualifier.Invariable != "")
         {
-            return qualifier.invariable;
+            return qualifier.Invariable;
         }
 
         if(noun == null)
         {
-            return qualifier.singularFeminine;
+            return qualifier.SingularFeminine;
         }
 
-        if(noun.genre == IngredientData.Genre.FEMININE)
+        if(noun.Genre == IngredientData.Genre.FEMININE)
         {
-            if(noun.plurality == IngredientData.Plurality.SINGULAR)
+            if(noun.Plurality == IngredientData.Plurality.SINGULAR)
             {
-                return qualifier.singularFeminine;
+                return qualifier.SingularFeminine;
             }
-            return qualifier.pluralFeminine;
+            return qualifier.PluralFeminine;
         }
 
-        if(noun.plurality == IngredientData.Plurality.SINGULAR)
+        if(noun.Plurality == IngredientData.Plurality.SINGULAR)
         {
-            return qualifier.singularMasculine;
+            return qualifier.SingularMasculine;
         }
-        return qualifier.pluralMasculine;
+        return qualifier.PluralMasculine;
     }
 
     private static string MatchArticle(string article, IngredientData.Noun noun)
@@ -180,15 +180,15 @@ public static class TextGenerator
 
         bool isUndefined = article.Contains("u");
         bool hasPossessive = article.Contains("p");
-        if(noun.plurality == IngredientData.Plurality.SINGULAR)
+        if(noun.Plurality == IngredientData.Plurality.SINGULAR)
         {
-            if(noun.genre == IngredientData.Genre.FEMININE)
+            if(noun.Genre == IngredientData.Genre.FEMININE)
             {
                 if(isUndefined)
                 {
                     return hasPossessive ? "d’une" : "une";
                 }
-                if(noun.hasContractedArticle)
+                if(noun.HasContractedArticle)
                 {
                     return hasPossessive ? "de l’" : "l’";
                 }
@@ -198,7 +198,7 @@ public static class TextGenerator
             {
                 return hasPossessive ? "d’un" : "un";
             }
-            if(noun.hasContractedArticle)
+            if(noun.HasContractedArticle)
             {
                 return hasPossessive ? "de l’" : "l’";
             }
