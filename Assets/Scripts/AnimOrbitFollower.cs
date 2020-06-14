@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(OrbitFollower))]
 public class AnimOrbitFollower : MonoBehaviour
 {
     private OrbitFollower orbitFollower;

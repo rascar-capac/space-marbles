@@ -25,8 +25,11 @@ public abstract class ASpawner<T, U> : MonoBehaviour
 
     public void DestroySpawnedObject(T spawnedObject)
     {
-        spawnedObjects.Remove(spawnedObject);
-        Destroy(spawnedObject);
+        if(spawnedObject)
+        {
+            spawnedObjects.Remove(spawnedObject);
+            Destroy(spawnedObject);
+        }
     }
 
     protected virtual void Awake()

@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public abstract class ADataInitializer<T> : MonoBehaviour
 {
-    public T Data => data;
     public DataInitializedEvent OnDataInitialized => onDataInitialized;
 
     protected T data;

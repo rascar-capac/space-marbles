@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpringJoint2D))]
 public class OrbitFollower : MonoBehaviour
 {
     private GameObject gameManager;
@@ -24,26 +25,33 @@ public class OrbitFollower : MonoBehaviour
 
     private Rigidbody2D FindNearestOrbit()
     {
+        if(!gameManager.TryGetComponent<StarSpawner>(out StarSpawner spawner))
+        {
+            return null;
+        }
+
         Rigidbody2D nearestOrbitAnchor = null;
         float nearestOrbitAnchorDistance = float.MaxValue;
-        if(gameManager.TryGetComponent<StarSpawner>(out StarSpawner spawner))
+        foreach(StarInitializer star in spawner.SpawnedObjects)
         {
-            foreach(StarInitializer star in spawner.SpawnedObjects)
+            if(!star.TryGetComponent<Orbitable>(out Orbitable orbitable))
             {
-                if(star.TryGetComponent<Orbitable>(out Orbitable orbitable))
+                break;
+            }
+
+            foreach(Orbiter orbit in orbitable.Orbits)
+            {
+                if(orbit.IsOccupied)
                 {
-                    foreach(Orbiter orbit in orbitable.Orbits)
-                    {
-                        if(!orbit.IsOccupied)
-                        {
-                            float distance = Vector2.Distance(transform.position, orbit.transform.position);
-                            if(distance < nearestOrbitAnchorDistance)
-                            {
-                                nearestOrbitAnchor = orbit.Anchor.GetComponent<Rigidbody2D>();
-                                nearestOrbitAnchorDistance = distance;
-                            }
-                        }
-                    }
+                    break;
+                }
+
+                float distance = Vector2.Distance(transform.position, orbit.transform.position);
+                if(distance < nearestOrbitAnchorDistance &&
+                        orbit.Anchor.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+                {
+                    nearestOrbitAnchor = rb;
+                    nearestOrbitAnchorDistance = distance;
                 }
             }
         }

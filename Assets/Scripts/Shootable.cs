@@ -9,13 +9,15 @@ public class Shootable : MonoBehaviour
     [SerializeField] private float maxRadius = 10f;
     [SerializeField] private float maxPrecisionOffset = 30f;
     private Camera mainCamera;
+    private float precision;
     private Rigidbody2D rb;
     private AnimShootable anim;
     private Vector2 mouseOffset;
 
-    public void Init(Camera mainCamera)
+    public void Init(float precision, Camera mainCamera)
     {
         this.mainCamera = mainCamera;
+        this.precision = precision;
     }
 
     private void Awake()
@@ -26,7 +28,7 @@ public class Shootable : MonoBehaviour
 
     private void Update()
     {
-        anim.SetSpeed(rb.velocity.magnitude);
+        anim?.SetSpeed(rb.velocity.magnitude);
     }
 
     private void OnMouseDown()
@@ -68,7 +70,7 @@ public class Shootable : MonoBehaviour
             camera.IsAiming = false;
         }
 
-        float maxOffsetAngle = (1 - GetComponent<IngredientInitializer>().Data.Precision) * maxPrecisionOffset;
+        float maxOffsetAngle = (1 - precision) * maxPrecisionOffset;
         float offsetAngle = Mathf.Deg2Rad * Random.Range(- maxOffsetAngle, maxOffsetAngle);
         Vector2 force = mouseOffset * power;
         force = new Vector2(

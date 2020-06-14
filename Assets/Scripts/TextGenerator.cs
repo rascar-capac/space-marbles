@@ -15,7 +15,7 @@ public static class TextGenerator
         return categoryElements;
     }
 
-    public static string Format(string rawString, Dictionary<IngredientData.IngredientType, IngredientInitializer> ingredients)
+    public static string Format(string rawString, Dictionary<IngredientData.IngredientType, Mergable> ingredients)
     {
 
         while(rawString.Contains("["))
@@ -43,19 +43,19 @@ public static class TextGenerator
             switch(placeholder)
             {
                 case "planet_synonym" :
-                    noun = ingredients[IngredientData.IngredientType.SOLID].Data.NamingElements.PlanetSynonym;
+                    noun = ingredients[IngredientData.IngredientType.SOLID].NamingElements.PlanetSynonym;
                     break;
                 case "concept" :
-                    noun = ingredients[IngredientData.IngredientType.SOLID].Data.NamingElements.Concept;
+                    noun = ingredients[IngredientData.IngredientType.SOLID].NamingElements.Concept;
                     break;
                 case "first_name" :
-                    noun = ingredients[IngredientData.IngredientType.LIQUID].Data.NamingElements.FirstName;
+                    noun = ingredients[IngredientData.IngredientType.LIQUID].NamingElements.FirstName;
                     break;
                 case "nickname" :
-                    noun = ingredients[IngredientData.IngredientType.SOLID].Data.NamingElements.Nickname;
+                    noun = ingredients[IngredientData.IngredientType.SOLID].NamingElements.Nickname;
                     break;
                 case "matriculation" :
-                    noun = ingredients[IngredientData.IngredientType.GASEOUS].Data.NamingElements.Matriculation;
+                    noun = ingredients[IngredientData.IngredientType.GASEOUS].NamingElements.Matriculation;
                     break;
                 default :
                     noun = null;
@@ -76,13 +76,13 @@ public static class TextGenerator
             switch(placeholder)
             {
                 case "style_adjective" :
-                    qualifier = ingredients[IngredientData.IngredientType.GASEOUS].Data.NamingElements.StyleAdjective;
+                    qualifier = ingredients[IngredientData.IngredientType.GASEOUS].NamingElements.StyleAdjective;
                     break;
                 case "personality_adjective" :
-                    qualifier = ingredients[IngredientData.IngredientType.LIQUID].Data.NamingElements.PersonalityAdjective;
+                    qualifier = ingredients[IngredientData.IngredientType.LIQUID].NamingElements.PersonalityAdjective;
                     break;
                 case "color" :
-                    qualifier = ingredients[IngredientData.IngredientType.LIQUID].Data.NamingElements.Color;
+                    qualifier = ingredients[IngredientData.IngredientType.LIQUID].NamingElements.Color;
                     break;
                 default :
                     qualifier = null;

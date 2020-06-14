@@ -5,22 +5,38 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer), typeof(CircleCollider2D))]
 public class Mergable : MonoBehaviour
 {
-    [SerializeField] private IngredientInitializer ingredient = null;
+    public IngredientData.NameElements NamingElements => namingElements;
+
     [SerializeField] private PlanetInitializer planetPrefab = null;
     [SerializeField] private TextAsset nameData = null;
     [SerializeField] private int segmentsCount = 30;
     private LineRenderer lineRenderer;
+    private IngredientData.IngredientType type;
+    private float influenceZone;
+    private IngredientData.NameElements namingElements;
+    private Texture2D surface;
+    private Texture2D pattern;
+    private Color[] colors;
+    private Texture2D extra;
     private GameObject gameManager;
     private Canvas canvas;
     private Camera mainCamera;
-    private Dictionary<IngredientData.IngredientType, IngredientInitializer> ingredients;
-    private List<IngredientInitializer> alreadyCollidingIngredients;
+    private Dictionary<IngredientData.IngredientType, Mergable> ingredients;
+    private List<Mergable> alreadyCollidingIngredients;
     private bool canGeneratePlanet;
     private Vector3 spawnPosition;
 
-    public void Init(float influenceZone, GameObject gameManager, Canvas canvas, Camera mainCamera)
+    public void Init(IngredientData.IngredientType type, float influenceZone,
+            IngredientData.NameElements namingElements, Texture2D surface, Texture2D pattern,
+            Color[] colors, Texture2D extra, GameObject gameManager, Canvas canvas, Camera mainCamera)
     {
-        GetComponent<CircleCollider2D>().radius = influenceZone;
+        this.type = type;
+        this.influenceZone = influenceZone;
+        this.namingElements = namingElements;
+        this.surface = surface;
+        this.pattern = pattern;
+        this.colors = colors;
+        this.extra = extra;
         this.gameManager = gameManager;
         this.canvas = canvas;
         this.mainCamera = mainCamera;
@@ -28,46 +44,55 @@ public class Mergable : MonoBehaviour
 
     public void SpawnPlanet()
     {
-        if(canGeneratePlanet)
+        if(!canGeneratePlanet)
         {
-            string planetName = ComputeRandomName();
-            Texture2D surface = ingredients[IngredientData.IngredientType.SOLID].Data.Surface;
-            Texture2D pattern = ingredients[IngredientData.IngredientType.SOLID].Data.Pattern;
-            Color[] colors = ingredients[IngredientData.IngredientType.LIQUID].Data.Colors;
-            Texture2D extra = ingredients[IngredientData.IngredientType.GASEOUS].Data.Extra;
-            float averageMass = 0;
-            float averageDrag = 0;
-            float averageAngularDrag = 0;
-            foreach(IngredientInitializer ingredient in ingredients.Values)
+            return;
+        }
+
+        string planetName = ComputeRandomName();
+        Texture2D surface = ingredients[IngredientData.IngredientType.SOLID].surface;
+        Texture2D pattern = ingredients[IngredientData.IngredientType.SOLID].pattern;
+        Color[] colors = ingredients[IngredientData.IngredientType.LIQUID].colors;
+        Texture2D extra = ingredients[IngredientData.IngredientType.GASEOUS].extra;
+        float averageMass = 0;
+        float averageDrag = 0;
+        float averageAngularDrag = 0;
+        foreach(Mergable ingredient in ingredients.Values)
+        {
+            if(ingredient.transform.parent.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
             {
-                Rigidbody2D rb = ingredient.GetComponent<Rigidbody2D>();
                 averageMass += rb.mass;
                 averageDrag += rb.drag;
                 averageAngularDrag += rb.angularDrag;
             }
-            averageMass /= ingredients.Count;
-            averageDrag /= ingredients.Count;
-            averageAngularDrag /= ingredients.Count;
-            PlanetData data = new PlanetData(planetName, surface, pattern, colors, extra,
-                    averageMass, averageDrag, averageAngularDrag);
-
-            PlanetInitializer generatedPlanet = Instantiate(planetPrefab, spawnPosition, Quaternion.identity);
-            generatedPlanet.InitData(data);
-            generatedPlanet.Init(gameManager, canvas, mainCamera);
         }
+        averageMass /= ingredients.Count;
+        averageDrag /= ingredients.Count;
+        averageAngularDrag /= ingredients.Count;
+        PlanetData data = new PlanetData(planetName, surface, pattern, colors, extra,
+                averageMass, averageDrag, averageAngularDrag);
+
+        PlanetInitializer generatedPlanet = Instantiate(planetPrefab, spawnPosition, Quaternion.identity);
+        generatedPlanet.InitData(data);
+        generatedPlanet.Init(gameManager, canvas, mainCamera);
     }
 
     public void DestroyIngredient()
     {
-        gameManager.GetComponent<IngredientSpawner>()?.DestroySpawnedObject(ingredient);
+        gameManager.GetComponent<IngredientSpawner>()?.DestroySpawnedObject(GetComponentInParent<IngredientInitializer>());
     }
 
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        alreadyCollidingIngredients = new List<IngredientInitializer>();
-        ingredients = new Dictionary<IngredientData.IngredientType, IngredientInitializer>();
+        alreadyCollidingIngredients = new List<Mergable>();
+        ingredients = new Dictionary<IngredientData.IngredientType, Mergable>();
         canGeneratePlanet = false;
+    }
+
+    private void Start()
+    {
+        GetComponent<CircleCollider2D>().radius = influenceZone;
     }
 
     private void LateUpdate()
@@ -77,27 +102,25 @@ public class Mergable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        IngredientInitializer collidingIngredient = other.GetComponentInParent<IngredientInitializer>();
-        if(!collidingIngredient)
+        if(!other.TryGetComponent<Mergable>(out Mergable collidingIngredient))
         {
             return;
         }
 
-        IngredientData.IngredientType type = ingredient.Data.Type;
-        IngredientData.IngredientType collidingType = collidingIngredient.Data.Type;
-        foreach(IngredientInitializer alreadyCollidingIngredient in alreadyCollidingIngredients)
+        IngredientData.IngredientType collidingType = collidingIngredient.type;
+        foreach(Mergable alreadyCollidingIngredient in alreadyCollidingIngredients)
         {
-            IngredientData.IngredientType alreadyCollidingType = alreadyCollidingIngredient.Data.Type;
+            IngredientData.IngredientType alreadyCollidingType = alreadyCollidingIngredient.type;
             if(alreadyCollidingType != type &&
                     collidingType != type &&
                     alreadyCollidingType != collidingType)
             {
                 canGeneratePlanet = true;
-                IngredientInitializer[] ingredients =
-                        new IngredientInitializer[]{collidingIngredient, alreadyCollidingIngredient, ingredient};
-                foreach(IngredientInitializer ingredient in ingredients)
+                Mergable[] ingredients =
+                        new Mergable[]{collidingIngredient, alreadyCollidingIngredient, this};
+                foreach(Mergable ingredient in ingredients)
                 {
-                    switch(ingredient.Data.Type)
+                    switch(ingredient.type)
                     {
                         case IngredientData.IngredientType.SOLID :
                             this.ingredients.Add(IngredientData.IngredientType.SOLID, ingredient);
@@ -125,8 +148,7 @@ public class Mergable : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        IngredientInitializer exitingIngredient = other.GetComponentInParent<IngredientInitializer>();
-        if(!exitingIngredient)
+        if(!other.TryGetComponent<Mergable>(out Mergable exitingIngredient))
         {
             return;
         }
@@ -137,10 +159,13 @@ public class Mergable : MonoBehaviour
     private void HandleGeneration()
     {
         // spawnPosition = Vector3.zero;
-        foreach(IngredientInitializer ingredient in ingredients.Values)
+        foreach(Mergable ingredient in ingredients.Values)
         {
             spawnPosition += ingredient.transform.position;
-            ingredient.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            if(ingredient.transform.parent.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+            {
+                rb.velocity = Vector2.zero;
+            }
 
             foreach(Collider2D collider in ingredient.GetComponentsInChildren<Collider2D>())
             {
@@ -157,9 +182,9 @@ public class Mergable : MonoBehaviour
 
     private void StartMergingAnimation()
     {
-        foreach(IngredientInitializer ingredient in ingredients.Values)
+        foreach(Mergable ingredient in ingredients.Values)
         {
-            ingredient.GetComponent<AnimMergable>().Merge();
+            ingredient.GetComponentInParent<AnimMergable>()?.Merge();
         }
     }
 
@@ -176,8 +201,8 @@ public class Mergable : MonoBehaviour
         for(int i = 0 ; i < segmentsCount ; i++)
         {
             float radAngle = 360 * (float) i / (float) segmentsCount * Mathf.Deg2Rad;
-            float x = Mathf.Cos(radAngle) * ingredient.Data.InfluenceZone;
-            float y = Mathf.Sin(radAngle) * ingredient.Data.InfluenceZone;
+            float x = Mathf.Cos(radAngle) * influenceZone;
+            float y = Mathf.Sin(radAngle) * influenceZone;
             points[i] = transform.TransformPoint(new Vector2(x, y));
         }
         points[segmentsCount] = points[0];

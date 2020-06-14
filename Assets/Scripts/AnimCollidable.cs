@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Animator), typeof(Collider2D))]
 public class AnimCollidable : MonoBehaviour
 {
     private Animator animator;

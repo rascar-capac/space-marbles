@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
 public class Zoomable : MonoBehaviour
 {
     [SerializeField] [Range(0.1f, 1f)] private float sensitivity = 1f;

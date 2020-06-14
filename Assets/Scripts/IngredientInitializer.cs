@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(Identifiable))]
 public class IngredientInitializer : A2DDataInitializer<IngredientData>
 {
     [SerializeField] private GameObject body = null;
@@ -13,7 +12,7 @@ public class IngredientInitializer : A2DDataInitializer<IngredientData>
         base.Init(gameManager, canvas, mainCamera);
 
         GetComponent<Identifiable>()?.Init(data.IngredientName, canvas, mainCamera);
-        GetComponent<Shootable>()?.Init(mainCamera);
+        GetComponent<Shootable>()?.Init(data.Precision, mainCamera);
         if(TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
         {
             rb.mass = data.Mass;
@@ -31,6 +30,7 @@ public class IngredientInitializer : A2DDataInitializer<IngredientData>
         {
             renderer.sprite = data.BodySprite;
         }
-        detector.GetComponent<Mergable>()?.Init(data.InfluenceZone, gameManager, canvas, mainCamera);
+        detector.GetComponent<Mergable>()?.Init(data.Type, data.InfluenceZone, data.NamingElements,
+                data.Surface, data.Pattern, data.Colors, data.Extra, gameManager, canvas, mainCamera);
     }
 }

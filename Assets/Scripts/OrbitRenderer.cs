@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer))]
-[RequireComponent(typeof(Orbiter))]
+[RequireComponent(typeof(LineRenderer), typeof(Orbiter))]
 public class OrbitRenderer : MonoBehaviour
 {
     [SerializeField] private int segmentsCount = 30;

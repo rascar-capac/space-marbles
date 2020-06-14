@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class StarInitializer : A2DDataInitializer<StarData>
 {
     [SerializeField] private GameObject body = null;

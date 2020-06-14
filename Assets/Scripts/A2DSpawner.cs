@@ -79,7 +79,7 @@ public abstract class A2DSpawner<T, U> : ASpawner<T, U>
 
         if(hasInitialMotion)
         {
-            newObject.GetComponent<Rigidbody2D>().AddForce(maxInitialForce * Random.insideUnitCircle, ForceMode2D.Impulse);
+            newObject.GetComponent<Rigidbody2D>()?.AddForce(maxInitialForce * Random.insideUnitCircle, ForceMode2D.Impulse);
         }
 
         return newObject;

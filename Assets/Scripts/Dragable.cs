@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
 public class Dragable : MonoBehaviour
 {
     public bool IsAiming { get; set; }
@@ -20,7 +21,7 @@ public class Dragable : MonoBehaviour
         if(!IsAiming && Input.GetMouseButton(0))
         {
             Vector3 mouseMouvement =new Vector3(- Input.GetAxis("Mouse X"), - Input.GetAxis("Mouse Y"), 0);
-            mainCamera.transform.position += mouseMouvement * mainCamera.orthographicSize / 10 * sensitivity;
+            transform.position += mouseMouvement * mainCamera.orthographicSize / 10 * sensitivity;
         }
     }
 }
