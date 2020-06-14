@@ -28,7 +28,7 @@ public abstract class ASpawner<T, U> : MonoBehaviour
         if(spawnedObject)
         {
             spawnedObjects.Remove(spawnedObject);
-            Destroy(spawnedObject);
+            Destroy(spawnedObject.gameObject);
         }
     }
 

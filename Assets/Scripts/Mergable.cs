@@ -102,12 +102,16 @@ public class Mergable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(!other.TryGetComponent<Mergable>(out Mergable collidingIngredient))
+        if(!other.TryGetComponent<IngredientInitializer>(out IngredientInitializer collidingIngredient))
+        {
+            return;
+        }
+        if(!collidingIngredient.Detector.TryGetComponent<Mergable>(out Mergable mergableIngredient))
         {
             return;
         }
 
-        IngredientData.IngredientType collidingType = collidingIngredient.type;
+        IngredientData.IngredientType collidingType = mergableIngredient.type;
         foreach(Mergable alreadyCollidingIngredient in alreadyCollidingIngredients)
         {
             IngredientData.IngredientType alreadyCollidingType = alreadyCollidingIngredient.type;
@@ -116,8 +120,7 @@ public class Mergable : MonoBehaviour
                     alreadyCollidingType != collidingType)
             {
                 canGeneratePlanet = true;
-                Mergable[] ingredients =
-                        new Mergable[]{collidingIngredient, alreadyCollidingIngredient, this};
+                Mergable[] ingredients = new Mergable[]{ mergableIngredient, alreadyCollidingIngredient, this };
                 foreach(Mergable ingredient in ingredients)
                 {
                     switch(ingredient.type)
@@ -142,18 +145,22 @@ public class Mergable : MonoBehaviour
         }
         else
         {
-            alreadyCollidingIngredients.Add(collidingIngredient);
+            alreadyCollidingIngredients.Add(mergableIngredient);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(!other.TryGetComponent<Mergable>(out Mergable exitingIngredient))
+        if(!other.TryGetComponent<IngredientInitializer>(out IngredientInitializer exitingIngredient))
+        {
+            return;
+        }
+        if(!exitingIngredient.Detector.TryGetComponent<Mergable>(out Mergable mergableIngredient))
         {
             return;
         }
 
-        alreadyCollidingIngredients.Remove(exitingIngredient);
+        alreadyCollidingIngredients.Remove(mergableIngredient);
     }
 
     private void HandleGeneration()
@@ -167,16 +174,17 @@ public class Mergable : MonoBehaviour
                 rb.velocity = Vector2.zero;
             }
 
-            foreach(Collider2D collider in ingredient.GetComponentsInChildren<Collider2D>())
+            ingredient.GetComponent<Collider2D>().enabled = false;
+            if(ingredient.transform.parent.TryGetComponent<Collider2D>(out Collider2D collider))
             {
                 collider.enabled = false;
             }
         }
         spawnPosition /= ingredients.Count;
 
-        LeanTween.move(ingredients[IngredientData.IngredientType.SOLID].gameObject, spawnPosition, 1f);
-        LeanTween.move(ingredients[IngredientData.IngredientType.LIQUID].gameObject, spawnPosition, 1f);
-        LeanTween.move(ingredients[IngredientData.IngredientType.GASEOUS].gameObject, spawnPosition, 1f)
+        LeanTween.move(ingredients[IngredientData.IngredientType.SOLID].transform.parent.gameObject, spawnPosition, 1f);
+        LeanTween.move(ingredients[IngredientData.IngredientType.LIQUID].transform.parent.gameObject, spawnPosition, 1f);
+        LeanTween.move(ingredients[IngredientData.IngredientType.GASEOUS].transform.parent.gameObject, spawnPosition, 1f)
                 .setOnComplete(() => StartMergingAnimation());
     }
 

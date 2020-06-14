@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class IngredientInitializer : A2DDataInitializer<IngredientData>
 {
+    public GameObject Detector => detector;
+
     [SerializeField] private GameObject body = null;
     [SerializeField] private GameObject detector = null;
 
