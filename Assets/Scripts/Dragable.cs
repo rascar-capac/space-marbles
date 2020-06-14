@@ -12,10 +12,6 @@ public class Dragable : MonoBehaviour
     private void Awake()
     {
         mainCamera = GetComponent<Camera>();
-    }
-
-    private void Start()
-    {
         IsAiming = false;
     }
 

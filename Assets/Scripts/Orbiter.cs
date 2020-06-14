@@ -23,7 +23,7 @@ public class Orbiter : MonoBehaviour
         GetComponent<OrbitRenderer>()?.Init(mainCamera);
     }
 
-    private void Start()
+    private void Awake()
     {
         timer = 0;
         IsOccupied = false;

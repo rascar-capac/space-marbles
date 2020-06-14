@@ -20,14 +20,14 @@ public class Zoomable : MonoBehaviour
     private void Awake()
     {
         mainCamera = GetComponent<Camera>();
+        currentZoomingVelocity = 0;
+        currentMovingVelocity = Vector3.zero;
     }
 
     private void Start()
     {
         targetCameraSize = mainCamera.orthographicSize;
         targetCameraPosition = mainCamera.transform.position;
-        currentZoomingVelocity = 0;
-        currentMovingVelocity = Vector3.zero;
     }
 
     private void LateUpdate()

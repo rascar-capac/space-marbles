@@ -11,23 +11,23 @@ public abstract class A2DSpawner<T, U> : ASpawner<T, U>
     [SerializeField] private bool hasInitialMotion = false;
     [SerializeField] private float maxInitialForce = 10f;
     [SerializeField] private Canvas canvas = null;
+    private Camera mainCamera;
     private CircleCollider2D circularArea;
     private bool isCircle;
     private float spawnX;
     private float spawnY;
-    private Camera mainCamera;
 
     protected override void Awake()
     {
         base.Awake();
         mainCamera = Camera.main;
+        spawnX = 0;
+        spawnY = 0;
     }
 
     private void Start()
     {
         isCircle = spawnArea.TryGetComponent<CircleCollider2D>(out circularArea);
-        spawnX = 0;
-        spawnY = 0;
         if(isCircle)
         {
             spawnX = - spawnArea.bounds.extents.x;
