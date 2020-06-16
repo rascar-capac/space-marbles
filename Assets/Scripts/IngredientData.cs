@@ -16,7 +16,7 @@ public class IngredientData : ScriptableObject
     public IngredientType Type => type;
     public float InfluenceZone => influenceZone;
     public NameElements NamingElements => namingElements;
-    public Texture2D Surface => surface;
+    public Sprite Surface => surface;
     public Texture2D Pattern => pattern;
     public Color[] Colors => colors;
     public Sprite Extra => extra;
@@ -38,7 +38,7 @@ public class IngredientData : ScriptableObject
     [Space]
     [SerializeField] private NameElements namingElements = null;
     [Space]
-    [SerializeField] private Texture2D surface = null;
+    [SerializeField] private Sprite surface = null;
     [SerializeField] private Texture2D pattern = null;
     [SerializeField] private Color[] colors = null;
     [SerializeField] private Sprite extra = null;

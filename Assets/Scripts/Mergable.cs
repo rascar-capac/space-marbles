@@ -14,7 +14,7 @@ public class Mergable : MonoBehaviour
     private IngredientData.IngredientType type;
     private float detectionZoneFactor;
     private IngredientData.NameElements namingElements;
-    private Texture2D surface;
+    private Sprite surface;
     private Texture2D pattern;
     private Color[] colors;
     private Sprite extra;
@@ -29,7 +29,7 @@ public class Mergable : MonoBehaviour
     private Vector3 spawnPosition;
 
     public void Init(IngredientData.IngredientType type, float detectionZoneFactor,
-            IngredientData.NameElements namingElements, Texture2D surface, Texture2D pattern,
+            IngredientData.NameElements namingElements, Sprite surface, Texture2D pattern,
             Color[] colors, Sprite extra, IngredientInitializer ingredient, GameObject gameManager, Canvas canvas, Camera mainCamera)
     {
         this.type = type;
@@ -53,7 +53,7 @@ public class Mergable : MonoBehaviour
         }
 
         string planetName = ComputeRandomName();
-        Texture2D surface = ingredients[IngredientData.IngredientType.SOLID].surface;
+        Sprite surface = ingredients[IngredientData.IngredientType.SOLID].surface;
         Texture2D pattern = ingredients[IngredientData.IngredientType.SOLID].pattern;
         Color[] colors = ingredients[IngredientData.IngredientType.LIQUID].colors;
         Sprite extra = ingredients[IngredientData.IngredientType.GASEOUS].extra;

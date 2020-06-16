@@ -26,7 +26,7 @@ public class PlanetInitializer : A2DDataInitializer<PlanetData>
         }
         if(body.TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer))
         {
-            renderer.material.SetTexture("_MainTex", data.Surface);
+            renderer.sprite = data.Surface;
             renderer.material.SetTexture("_Pattern", data.Pattern);
             renderer.material.SetColor("_ColorA", data.Colors[0]);
             renderer.material.SetColor("_ColorB", data.Colors[1]);

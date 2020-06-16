@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlanetData
 {
     public string PlanetName => planetName;
-    public Texture2D Surface => surface;
+    public Sprite Surface => surface;
     public Texture2D Pattern => pattern;
     public Color[] Colors => colors;
     public Sprite Extra => extra;
@@ -14,7 +14,7 @@ public class PlanetData
     public float AngularDrag => angularDrag;
 
     private string planetName;
-    private Texture2D surface;
+    private Sprite surface;
     private Texture2D pattern;
     private Color[] colors;
     private Sprite extra;
@@ -22,7 +22,7 @@ public class PlanetData
     private float drag;
     private float angularDrag;
 
-    public PlanetData(string planetName, Texture2D surface, Texture2D pattern, Color[] colors, Sprite extra, float mass, float drag, float angularDrag)
+    public PlanetData(string planetName, Sprite surface, Texture2D pattern, Color[] colors, Sprite extra, float mass, float drag, float angularDrag)
     {
         this.planetName = planetName;
         this.surface = surface;
