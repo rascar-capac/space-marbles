@@ -70,15 +70,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 99427a585c34bf945b1e128eb8ad0477, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1134492280859549453
@@ -160,7 +160,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.64
+  m_Radius: 2.1
 --- !u!95 &2711186537276102822
 Animator:
   serializedVersion: 3
@@ -245,9 +245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586dd5234b68862469e0006a0034ab58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelOffset: 10
   idPanelPrefab: {fileID: 7566823657306307449, guid: 2e4f62f73260a324eaacfb269dded508,
     type: 3}
+  panelOffset: 10
 --- !u!114 &8700442382491223670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,7 +343,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1953498730234841441, guid: b24d35a6ac33e004585340981e394958,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -351,7 +352,7 @@ SpriteRenderer:
   m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &5859885224229009814
@@ -512,8 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f8d638e8213e940959ca9b42cb95e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredient: {fileID: -2145331996283020571}
   planetPrefab: {fileID: -5441802930208253632, guid: 04fccfb1215503e41819f400eff1987b,
     type: 3}
-  segmentsCount: 30
   nameData: {fileID: 4900000, guid: bb1b065022e0c11478f8bfcd7b2c0100, type: 3}
+  segmentsCount: 30
