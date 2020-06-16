@@ -17,7 +17,7 @@ public class Mergable : MonoBehaviour
     private Texture2D surface;
     private Texture2D pattern;
     private Color[] colors;
-    private Texture2D extra;
+    private Sprite extra;
     private IngredientInitializer ingredient;
     private GameObject gameManager;
     private Canvas canvas;
@@ -30,7 +30,7 @@ public class Mergable : MonoBehaviour
 
     public void Init(IngredientData.IngredientType type, float detectionZoneFactor,
             IngredientData.NameElements namingElements, Texture2D surface, Texture2D pattern,
-            Color[] colors, Texture2D extra, IngredientInitializer ingredient, GameObject gameManager, Canvas canvas, Camera mainCamera)
+            Color[] colors, Sprite extra, IngredientInitializer ingredient, GameObject gameManager, Canvas canvas, Camera mainCamera)
     {
         this.type = type;
         this.detectionZoneFactor = detectionZoneFactor;
@@ -56,7 +56,7 @@ public class Mergable : MonoBehaviour
         Texture2D surface = ingredients[IngredientData.IngredientType.SOLID].surface;
         Texture2D pattern = ingredients[IngredientData.IngredientType.SOLID].pattern;
         Color[] colors = ingredients[IngredientData.IngredientType.LIQUID].colors;
-        Texture2D extra = ingredients[IngredientData.IngredientType.GASEOUS].extra;
+        Sprite extra = ingredients[IngredientData.IngredientType.GASEOUS].extra;
         float averageMass = 0;
         float averageDrag = 0;
         float averageAngularDrag = 0;

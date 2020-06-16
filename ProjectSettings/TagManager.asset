@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Line Renderer
+    uniqueID: 712854893
+    locked: 0
+  - name: Celestial
+    uniqueID: 306711865
+    locked: 0

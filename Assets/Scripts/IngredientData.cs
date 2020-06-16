@@ -19,7 +19,7 @@ public class IngredientData : ScriptableObject
     public Texture2D Surface => surface;
     public Texture2D Pattern => pattern;
     public Color[] Colors => colors;
-    public Texture2D Extra => extra;
+    public Sprite Extra => extra;
 
     [SerializeField] private string ingredientName = "";
     [SerializeField] private Sprite bodySprite = null;
@@ -41,7 +41,7 @@ public class IngredientData : ScriptableObject
     [SerializeField] private Texture2D surface = null;
     [SerializeField] private Texture2D pattern = null;
     [SerializeField] private Color[] colors = null;
-    [SerializeField] private Texture2D extra = null;
+    [SerializeField] private Sprite extra = null;
 
     [System.Serializable]
     public class NameElements

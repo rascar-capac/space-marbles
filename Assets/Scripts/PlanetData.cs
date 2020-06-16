@@ -8,7 +8,7 @@ public class PlanetData
     public Texture2D Surface => surface;
     public Texture2D Pattern => pattern;
     public Color[] Colors => colors;
-    public Texture2D Extra => extra;
+    public Sprite Extra => extra;
     public float Mass => mass;
     public float Drag => drag;
     public float AngularDrag => angularDrag;
@@ -17,12 +17,12 @@ public class PlanetData
     private Texture2D surface;
     private Texture2D pattern;
     private Color[] colors;
-    private Texture2D extra;
+    private Sprite extra;
     private float mass;
     private float drag;
     private float angularDrag;
 
-    public PlanetData(string planetName, Texture2D surface, Texture2D pattern, Color[] colors, Texture2D extra, float mass, float drag, float angularDrag)
+    public PlanetData(string planetName, Texture2D surface, Texture2D pattern, Color[] colors, Sprite extra, float mass, float drag, float angularDrag)
     {
         this.planetName = planetName;
         this.surface = surface;
