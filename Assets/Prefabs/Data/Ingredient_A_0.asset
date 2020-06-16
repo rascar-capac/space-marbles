@@ -21,7 +21,7 @@ MonoBehaviour:
   precision: 1
   animatorController: {fileID: 22100000, guid: ce821b6639322124bbe9d8698423a127, type: 2}
   type: 0
-  influenceZone: 2
+  influenceZone: 1.5
   namingElements:
     planetSynonym:
       hasContractedArticle: 1

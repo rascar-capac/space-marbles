@@ -12,7 +12,7 @@ public class Mergable : MonoBehaviour
     [SerializeField] private int segmentsCount = 30;
     private LineRenderer lineRenderer;
     private IngredientData.IngredientType type;
-    private float influenceZone;
+    private float detectionZoneFactor;
     private IngredientData.NameElements namingElements;
     private Texture2D surface;
     private Texture2D pattern;
@@ -21,17 +21,18 @@ public class Mergable : MonoBehaviour
     private GameObject gameManager;
     private Canvas canvas;
     private Camera mainCamera;
+    private float detectionZone;
     private Dictionary<IngredientData.IngredientType, Mergable> ingredients;
     private List<Mergable> alreadyCollidingIngredients;
     private bool canGeneratePlanet;
     private Vector3 spawnPosition;
 
-    public void Init(IngredientData.IngredientType type, float influenceZone,
+    public void Init(IngredientData.IngredientType type, float detectionZoneFactor,
             IngredientData.NameElements namingElements, Texture2D surface, Texture2D pattern,
             Color[] colors, Texture2D extra, GameObject gameManager, Canvas canvas, Camera mainCamera)
     {
         this.type = type;
-        this.influenceZone = influenceZone;
+        this.detectionZoneFactor = detectionZoneFactor;
         this.namingElements = namingElements;
         this.surface = surface;
         this.pattern = pattern;
@@ -92,7 +93,8 @@ public class Mergable : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<CircleCollider2D>().radius = influenceZone;
+        detectionZone = transform.parent.GetComponent<CircleCollider2D>().radius * detectionZoneFactor;
+        GetComponent<CircleCollider2D>().radius = detectionZone;
     }
 
     private void LateUpdate()
@@ -209,8 +211,8 @@ public class Mergable : MonoBehaviour
         for(int i = 0 ; i < segmentsCount ; i++)
         {
             float radAngle = 360 * (float) i / (float) segmentsCount * Mathf.Deg2Rad;
-            float x = Mathf.Cos(radAngle) * influenceZone;
-            float y = Mathf.Sin(radAngle) * influenceZone;
+            float x = Mathf.Cos(radAngle) * detectionZone;
+            float y = Mathf.Sin(radAngle) * detectionZone;
             points[i] = transform.TransformPoint(new Vector2(x, y));
         }
         points[segmentsCount] = points[0];
