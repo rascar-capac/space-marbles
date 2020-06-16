@@ -33,6 +33,6 @@ public class IngredientInitializer : A2DDataInitializer<IngredientData>
             renderer.sprite = data.BodySprite;
         }
         detector.GetComponent<Mergable>()?.Init(data.Type, data.InfluenceZone, data.NamingElements,
-                data.Surface, data.Pattern, data.Colors, data.Extra, gameManager, canvas, mainCamera);
+                data.Surface, data.Pattern, data.Colors, data.Extra, this, gameManager, canvas, mainCamera);
     }
 }

@@ -18,6 +18,7 @@ public class Mergable : MonoBehaviour
     private Texture2D pattern;
     private Color[] colors;
     private Texture2D extra;
+    private IngredientInitializer ingredient;
     private GameObject gameManager;
     private Canvas canvas;
     private Camera mainCamera;
@@ -29,7 +30,7 @@ public class Mergable : MonoBehaviour
 
     public void Init(IngredientData.IngredientType type, float detectionZoneFactor,
             IngredientData.NameElements namingElements, Texture2D surface, Texture2D pattern,
-            Color[] colors, Texture2D extra, GameObject gameManager, Canvas canvas, Camera mainCamera)
+            Color[] colors, Texture2D extra, IngredientInitializer ingredient, GameObject gameManager, Canvas canvas, Camera mainCamera)
     {
         this.type = type;
         this.detectionZoneFactor = detectionZoneFactor;
@@ -38,6 +39,7 @@ public class Mergable : MonoBehaviour
         this.pattern = pattern;
         this.colors = colors;
         this.extra = extra;
+        this.ingredient = ingredient;
         this.gameManager = gameManager;
         this.canvas = canvas;
         this.mainCamera = mainCamera;
@@ -58,9 +60,9 @@ public class Mergable : MonoBehaviour
         float averageMass = 0;
         float averageDrag = 0;
         float averageAngularDrag = 0;
-        foreach(Mergable ingredient in ingredients.Values)
+        foreach(Mergable detector in ingredients.Values)
         {
-            if(ingredient.transform.parent.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+            if(detector.ingredient.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
             {
                 averageMass += rb.mass;
                 averageDrag += rb.drag;
@@ -93,7 +95,7 @@ public class Mergable : MonoBehaviour
 
     private void Start()
     {
-        detectionZone = transform.parent.GetComponent<CircleCollider2D>().radius * detectionZoneFactor;
+        detectionZone = ingredient.GetComponent<CircleCollider2D>().radius * detectionZoneFactor;
         GetComponent<CircleCollider2D>().radius = detectionZone;
     }
 
@@ -168,25 +170,25 @@ public class Mergable : MonoBehaviour
     private void HandleGeneration()
     {
         // spawnPosition = Vector3.zero;
-        foreach(Mergable ingredient in ingredients.Values)
+        foreach(Mergable detector in ingredients.Values)
         {
-            spawnPosition += ingredient.transform.position;
-            if(ingredient.transform.parent.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+            spawnPosition += detector.transform.position;
+            if(detector.ingredient.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
             {
                 rb.velocity = Vector2.zero;
             }
 
-            ingredient.GetComponent<Collider2D>().enabled = false;
-            if(ingredient.transform.parent.TryGetComponent<Collider2D>(out Collider2D collider))
+            detector.GetComponent<Collider2D>().enabled = false;
+            if(detector.ingredient.TryGetComponent<Collider2D>(out Collider2D collider))
             {
                 collider.enabled = false;
             }
         }
         spawnPosition /= ingredients.Count;
 
-        LeanTween.move(ingredients[IngredientData.IngredientType.SOLID].transform.parent.gameObject, spawnPosition, 1f);
-        LeanTween.move(ingredients[IngredientData.IngredientType.LIQUID].transform.parent.gameObject, spawnPosition, 1f);
-        LeanTween.move(ingredients[IngredientData.IngredientType.GASEOUS].transform.parent.gameObject, spawnPosition, 1f)
+        LeanTween.move(ingredients[IngredientData.IngredientType.SOLID].ingredient.gameObject, spawnPosition, 1f);
+        LeanTween.move(ingredients[IngredientData.IngredientType.LIQUID].ingredient.gameObject, spawnPosition, 1f);
+        LeanTween.move(ingredients[IngredientData.IngredientType.GASEOUS].ingredient.gameObject, spawnPosition, 1f)
                 .setOnComplete(() => StartMergingAnimation());
     }
 
