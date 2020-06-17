@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(LineRenderer), typeof(CircleCollider2D))]
 public class Mergable : MonoBehaviour
@@ -169,7 +170,6 @@ public class Mergable : MonoBehaviour
 
     private void HandleGeneration()
     {
-        // spawnPosition = Vector3.zero;
         foreach(Mergable detector in ingredients.Values)
         {
             spawnPosition += detector.transform.position;
@@ -186,10 +186,11 @@ public class Mergable : MonoBehaviour
         }
         spawnPosition /= ingredients.Count;
 
-        LeanTween.move(ingredients[IngredientData.IngredientType.SOLID].ingredient.gameObject, spawnPosition, 1f);
-        LeanTween.move(ingredients[IngredientData.IngredientType.LIQUID].ingredient.gameObject, spawnPosition, 1f);
-        LeanTween.move(ingredients[IngredientData.IngredientType.GASEOUS].ingredient.gameObject, spawnPosition, 1f)
-                .setOnComplete(() => StartMergingAnimation());
+        Sequence merging = DOTween.Sequence();
+        merging.Append(ingredients[IngredientData.IngredientType.SOLID].ingredient.transform.DOMove(spawnPosition, 1f))
+               .Join(ingredients[IngredientData.IngredientType.LIQUID].ingredient.transform.DOMove(spawnPosition, 1f))
+               .Join(ingredients[IngredientData.IngredientType.GASEOUS].ingredient.transform.DOMove(spawnPosition, 1f))
+               .OnComplete(() => StartMergingAnimation());
     }
 
     private void StartMergingAnimation()
