@@ -1,56 +1,64 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(Camera))]
 public class Zoomable : MonoBehaviour
 {
-    [SerializeField] [Range(0.1f, 1f)] private float sensitivity = 1f;
-    [SerializeField] [Range(0.1f, 1f)] private float speed = 0.1f;
-    [SerializeField] [Range(1f, 200f)] private float minZoom = 3f;
-    [SerializeField] [Range(1f, 200f)] private float maxZoom = 100f;
-
+    [SerializeField] [Range(1, 100)] private int zoomLevelCount = 10;
+    [SerializeField] [Range(1, 200)] private int minZoom = 10;
+    [SerializeField] [Range(1, 200)] private int maxZoom = 100;
+    [SerializeField] [Range(0.1f, 1f)] private float zoomDuration = 0.1f;
     private Camera mainCamera;
-    private float currentZoomingVelocity;
-    private Vector3 currentMovingVelocity;
-    private float targetCameraSize;
-    private Vector3 targetCameraPosition;
+    private float targetedCameraSize;
+    private Vector3 targetedCameraPosition;
+    private Sequence zoom;
+    private int currentZoomLevel;
 
-    private const float ZOOM_DELTA = 0.001f;
+    public void Stop()
+    {
+        mainCamera.DOKill();
+        mainCamera.transform.DOKill();
+    }
 
     private void Awake()
     {
         mainCamera = GetComponent<Camera>();
-        currentZoomingVelocity = 0;
-        currentMovingVelocity = Vector3.zero;
+        zoom = DOTween.Sequence();
+        currentZoomLevel = zoomLevelCount - 1;
     }
 
     private void Start()
     {
-        targetCameraSize = mainCamera.orthographicSize;
-        targetCameraPosition = mainCamera.transform.position;
+        mainCamera.orthographicSize = maxZoom;
+        targetedCameraPosition = mainCamera.transform.position;
     }
 
     private void LateUpdate()
     {
-        float scrollWheelAxis = Input.GetAxis("Mouse ScrollWheel");
-        if(scrollWheelAxis != 0)
+        float zoomIntensity = Input.mouseScrollDelta.y;
+        if(zoomIntensity != 0)
         {
-            // TODO dynamic zoom
-            // float rawTargetCameraSize = targetCameraSize - (scrollWheelAxis * (mainCamera.orthographicSize / maxZoom) * (sensitivity * 500));
-            float rawTargetCameraSize = targetCameraSize - (scrollWheelAxis * (sensitivity * 50));
-            targetCameraSize = Mathf.Clamp(rawTargetCameraSize, minZoom, maxZoom);
-            if(targetCameraSize == rawTargetCameraSize)
+            int unclampedCurrentZoomLevel = currentZoomLevel - (int) zoomIntensity;
+            currentZoomLevel = Mathf.Clamp(unclampedCurrentZoomLevel, 0, zoomLevelCount - 1);
+            if(currentZoomLevel == unclampedCurrentZoomLevel)
             {
-                Vector3 mouseOffset = mainCamera.ScreenToWorldPoint(Input.mousePosition) - targetCameraPosition;
-                targetCameraPosition += mouseOffset / Mathf.Abs(mainCamera.orthographicSize - targetCameraSize);
-            }
-        }
+                targetedCameraSize = ComputeCameraSize(currentZoomLevel);
 
-        if(Mathf.Abs(mainCamera.orthographicSize - targetCameraSize) > ZOOM_DELTA)
-        {
-            mainCamera.orthographicSize = LeanSmooth.damp(mainCamera.orthographicSize, targetCameraSize, ref currentZoomingVelocity, speed);
-            mainCamera.transform.position = LeanSmooth.damp(mainCamera.transform.position, targetCameraPosition, ref currentMovingVelocity, speed);
+                Vector3 mouseOffset = mainCamera.ScreenToWorldPoint(Input.mousePosition) - mainCamera.transform.position;
+                targetedCameraPosition = mainCamera.transform.position + mouseOffset - mouseOffset * (targetedCameraSize / mainCamera.orthographicSize);
+            }
+
+            Stop();
+            zoom.Append(mainCamera.DOOrthoSize(targetedCameraSize, zoomDuration))
+                .Join(mainCamera.transform.DOMove(targetedCameraPosition, zoomDuration));
         }
+    }
+
+    private float ComputeCameraSize(int zoomLevel)
+    {
+        // return Mathf.Pow(maxZoom - minZoom + 1, (float) zoomLevel / (zoomLevelCount - 1)) + minZoom - 1;
+        return (maxZoom - minZoom) * Mathf.Pow(zoomLevel, 2) / Mathf.Pow(zoomLevelCount - 1, 2) + minZoom;
     }
 }

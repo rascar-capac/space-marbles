@@ -161,10 +161,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c993af1d4be466841a71ac91cbca5243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 1
-  speed: 0.1
-  minZoom: 3
+  zoomLevelCount: 10
+  minZoom: 10
   maxZoom: 100
+  zoomDuration: 0.5
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -511,7 +511,7 @@ PrefabInstance:
     - target: {fileID: 3533414235161348720, guid: 4e73cb6d15f74e844b30de65902da5b0,
         type: 3}
       propertyPath: minGapBetweenObjects
-      value: 100
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 7018855681671090820, guid: 4e73cb6d15f74e844b30de65902da5b0,
         type: 3}
