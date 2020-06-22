@@ -13,7 +13,6 @@ public class PlanetInitializer : A2DDataInitializer<PlanetData>
 
         GetComponent<Identifiable>()?.Init(data.PlanetName, canvas, mainCamera);
         GetComponent<OrbitFollower>()?.Init(gameManager);
-        transform.localScale = Vector3.zero;
         if(TryGetComponent<Rigidbody2D>(out Rigidbody2D rigidbody))
         {
             rigidbody.mass = data.Mass;
